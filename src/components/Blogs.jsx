@@ -2,35 +2,23 @@ import React, { useEffect, useState } from "react";
 import "./components.css";
 import Moment from "moment";
 import { Link } from "react-router-dom";
+import { db, getBlogs } from "../../firebase";
 
 export default function Blogs() {
-  let ADDRESS;
-  if (import.meta.env.VITE_STATUS === "production") {
-    ADDRESS = import.meta.env.VITE_PRODUCTION_ADDRESS;
-  } else {
-    ADDRESS = import.meta.env.VITE_DEV_ADDRESS;
-  }
+  useEffect(() => {
+    getBlogs(db).then((data) => {
+      setBlogs(data);
+      console.log(data);
+    });
+  }, []);
 
   const [blogs, setBlogs] = useState([
     {
       title: "",
       content: "",
-      date_posted: "",
+      date_posted: "Today",
     },
   ]);
-
-  useEffect(() => {
-    fetch(ADDRESS + "/blogs")
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      })
-      .then((jsonRes) => {
-        setBlogs([...jsonRes]);
-      })
-      .catch((err) => console.error(err));
-  }, []);
 
   Moment.locale("en");
 

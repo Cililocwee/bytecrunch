@@ -11,6 +11,8 @@ import FloatingCreate from "./components/FloatingCreate";
 import { GoogleLogin, googleLogout, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useEffect, useReducer, useState } from "react";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -59,13 +61,15 @@ function App() {
         <Routes>
           <Route path="/" element={<Blogs />} />
           <Route path="/blogs" element={<Blogs />} />
-          <Route path="/create" element={<Create />} />
+          <Route path="/create" element={<Create user={profile} />} />
           <Route
             path="/blog/:id"
             element={<DetailedBlog profile={profile} />}
           />
           <Route path="/aboutme" element={<AboutMe />} />
           <Route path="/update/:id" element={<UpdateForm />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
         {profile?.id === import.meta.env.VITE_ADMIN_ID ? (
           <FloatingCreate />

@@ -1,15 +1,9 @@
+import { doc, setDoc } from "firebase/firestore";
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { db, writeBlog } from "../../firebase";
 
-export default function Create() {
-  let ADDRESS;
-  if (import.meta.env.VITE_STATUS === "production") {
-    ADDRESS = import.meta.env.VITE_PRODUCTION_ADDRESS;
-  } else {
-    ADDRESS = import.meta.env.VITE_DEV_ADDRESS;
-  }
-
+export default function Create({ user }) {
   const [input, setInput] = useState({
     title: "",
     content: "",
@@ -31,6 +25,14 @@ export default function Create() {
     setDate(new Date());
   }
 
+  async function publishBlog(blogObj) {
+    await setDoc(doc(db, "blogs", blogObj.id), {
+      content: blogObj.content,
+      date_posted: blogObj.date_posted,
+      title: blogObj.title,
+    });
+  }
+
   function handleClick(event) {
     event.preventDefault();
 
@@ -46,15 +48,18 @@ export default function Create() {
       title: input.title,
       content: input.content,
       date_posted: date,
+      id: crypto.randomUUID(),
     };
 
-    // TODO Refactor this to either take a fetch call or chain .then() after axios
-    axios.post(ADDRESS + "/create", newBlog);
-    navigate("/blogs");
+    // TODO Refactor to FB
+    // writeBlog(newBlog);
+    publishBlog(newBlog);
+    // navigate("/blogs");
   }
 
   return (
     <div className="flex flex-col items-center pt-3 pb-16 lg:pt-16 lg:pb-24  dark:bg-gray-900">
+      <button onClick={() => console.log(user)}>Click</button>
       <h1 className="text-5xl font-bold mt-0 mb-6">Post a new blog</h1>
       <form className="gap-5 items-stretch mb-3 w-96 flex flex-col">
         <div className="form-group">

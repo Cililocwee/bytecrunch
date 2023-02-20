@@ -28,7 +28,7 @@ function App() {
       setName(data.name);
     } catch (err) {
       console.error(err);
-      alert("An error occured while fetching user data");
+      // alert("An error occured while fetching user data");
     }
   };
 
@@ -55,7 +55,7 @@ function App() {
           login={login}
           logout={logOut}
         />
-        <p>{`Logged in as ${name} - ${user?.email}`}</p>
+        {/* <p>{`Logged in as ${name} - ${user?.email}`}</p> */}
         <Routes>
           <Route path="/" element={<Blogs />} />
           <Route path="/blogs" element={<Blogs />} />

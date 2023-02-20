@@ -15,7 +15,7 @@ export default function Create({ user }) {
 
   if (auth.currentUser == null) {
     navigate("/blogs");
-  } else if (auth.currentUser.uid !== "KwZtXs3LsyY1y4J6jd6zFGpoMdi1") {
+  } else if (auth.currentUser.uid !== import.meta.env.VITE_ADMIN_ID) {
     navigate("/blogs");
   }
 
@@ -69,7 +69,7 @@ export default function Create({ user }) {
         <h1>Restricted</h1>
       </div>
     );
-  } else if (auth.currentUser.uid === "KwZtXs3LsyY1y4J6jd6zFGpoMdi1") {
+  } else if (auth.currentUser.uid === import.meta.env.VITE_ADMIN_ID) {
     return (
       <div className="flex flex-col items-center pt-3 pb-16 lg:pt-16 lg:pb-24  dark:bg-gray-900">
         <button onClick={() => console.log(user)}>Click</button>

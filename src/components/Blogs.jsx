@@ -8,7 +8,6 @@ export default function Blogs() {
   useEffect(() => {
     getBlogs(db).then((data) => {
       setBlogs(data);
-      // console.log(data);
     });
   }, []);
 
@@ -40,7 +39,7 @@ export default function Blogs() {
             </h4>
             <div className="flex justify-between">
               <p className="my-3 text-slate-400 text-sm">
-                Published: {Moment(item.date_posted?.seconds * 1000).calendar()}
+                Published: {Moment(item.date_posted).calendar()}
               </p>
             </div>
           </div>

@@ -55,6 +55,12 @@ export default function DetailedBlog({ id, user }) {
     event.preventDefault();
   }
 
+  function decodeHtml(html) {
+    let txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+  }
+
   return (
     <div
       id="detailed_blog"
@@ -65,7 +71,7 @@ export default function DetailedBlog({ id, user }) {
           <h1 className="text-center my-4 lemb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-whiteading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">
             {blog.title}
           </h1>
-          <p className="whitespace-pre-wrap">{blog.content}</p>
+          <p className="whitespace-pre-wrap">{decodeHtml(blog.content)}</p>
           <div className="flex justify-between items-center">
             <p className="my-3 text-slate-400 text-sm">
               Posted: {Moment(blog.date_posted).calendar()}

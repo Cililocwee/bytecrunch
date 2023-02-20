@@ -19,6 +19,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { getDatabase, ref, set } from "firebase/database";
+import moment from "moment";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDAhYlyUV1n4ZUkEZrTgeeVlmDL9jvAhZ4",
@@ -44,7 +45,11 @@ export async function getBlogs(db) {
   const blogsCol = collection(db, "blogs");
   const blogsSnapshot = await getDocs(blogsCol);
   const blogsList = blogsSnapshot.docs.map((doc) => doc.data());
-  return blogsList.reverse();
+  const sortedBlogsList = blogsList.sort((a, b) =>
+    moment(a.date_posted).diff(moment(b.date_posted))
+  );
+  // return blogsList;
+  return sortedBlogsList;
 }
 
 // get one blog

@@ -28,7 +28,7 @@ export default function Create({ user }) {
         [name]: value,
       };
     });
-    setDate(new Date());
+    setDate(new Date().toLocaleString());
   }
 
   async function publishBlog(blogObj) {

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import CommentInput from "./CommentInput";
 import CommentCard from "./CommentCard";
 import { auth, db, getSpecificBlog } from "../../firebase";
-import { deleteDoc, doc } from "firebase/firestore";
+import { deleteDoc, doc, setDoc } from "firebase/firestore";
 
 export default function DetailedBlog({ id, user }) {
   const location = window.location.href.split("/blog/")[1];
@@ -22,7 +22,7 @@ export default function DetailedBlog({ id, user }) {
 
   const [input, setInput] = useState({
     username: "",
-    profile_picture_url: "",
+    profile_pic_url: "",
     comment_body: "",
     date_posted: "",
     associated_blog: location,
@@ -47,15 +47,43 @@ export default function DetailedBlog({ id, user }) {
       return {
         ...prevInput,
         [name]: value,
-        username: profile.given_name,
-        profile_pic_url: profile.picture,
-        date_posted: new Date(),
+        username: auth.currentUser.displayName,
+        profile_pic_url: auth.currentUser.photoURL,
       };
+    });
+
+    console.log(input);
+  }
+
+  async function publishComment(commentObj) {
+    await setDoc(doc(db, "comments", commentObj.id), {
+      username: commentObj.username,
+      profile_pic_url: commentObj.profile_pic_url,
+      comment_body: commentObj.comment_body,
+      date_posted: commentObj.date_posted,
+      associated_blog: commentObj.associated_blog,
     });
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
+
+    await setDoc(doc(db, "comments", crypto.randomUUID()), {
+      username: auth.currentUser.displayName,
+      profile_pic_url: auth.currentUser.photoURL,
+      comment_body: input.comment_body,
+      date_posted: new Date().toLocaleString(),
+      associated_blog: location,
+    }).then(() => alert("Posted"));
+    // const newComment = {
+    //   username: auth.currentUser.displayName,
+    //   profile_pic_url: auth.currentUser.photoURL,
+    //   comment_body: input.comment_body,
+    //   date_posted: new Date().toLocaleString(),
+    //   associated_blog: location,
+    // };
+
+    // publishComment(newComment).then(() => alert("Commented"));
   }
 
   // These functions are for the actual blog
@@ -110,13 +138,11 @@ export default function DetailedBlog({ id, user }) {
         </div>
       )}
 
-      {user && (
-        <CommentInput
-          changefnc={handleChange}
-          comment_body={input.comment_body}
-          submitfnc={handleSubmit}
-        />
-      )}
+      <CommentInput
+        changefnc={handleChange}
+        comment_body={input.comment_body}
+        submitfnc={handleSubmit}
+      />
 
       {comments.map((comment) => (
         <CommentCard

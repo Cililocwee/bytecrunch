@@ -8,7 +8,7 @@ export default function Blogs() {
   useEffect(() => {
     getBlogs(db).then((data) => {
       setBlogs(data);
-      console.log(data);
+      // console.log(data);
     });
   }, []);
 
@@ -16,7 +16,7 @@ export default function Blogs() {
     {
       title: "",
       content: "",
-      date_posted: "Today",
+      date_posted: "",
     },
   ]);
 
@@ -33,14 +33,14 @@ export default function Blogs() {
             <h4 className="text-left my-4 lemb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-3 lg:text-4xl dark:text-whiteading-tight text-gray-900 lg:mb-3 lg:text-4xl dark:text-white">
               <Link
                 className="no-underline text-slate-500"
-                to={`/blog/${item._id}`}
+                to={`/blog/${item.id}`}
               >
                 {item.title}
               </Link>
             </h4>
             <div className="flex justify-between">
               <p className="my-3 text-slate-400 text-sm">
-                Published: {Moment(item.date_posted).calendar()}
+                Published: {Moment(item.date_posted?.seconds * 1000).calendar()}
               </p>
             </div>
           </div>

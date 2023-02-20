@@ -4,11 +4,13 @@ import "./Navbar.css";
 import Github from "../assets/github.png";
 import Linkedin from "../assets/linkedin.png";
 import DropDown from "./DropDown";
-import { logout, signInWithGoogle } from "../../firebase";
+import { auth, logout, signInWithGoogle } from "../../firebase";
+import GoogleLogInButton from "./GoogleLogInButton";
+import GoogleLogOutButton from "./GoogleLogOutButton";
 
 export default function Navbar({}) {
   return (
-    <nav className="font-sans flex justify-between text-center sm:align-center sm:flex-row sm:text-left sm:justify-center py-4 px-6 shadow sm:items-center w-full">
+    <nav className="font-sans flex justify-between text-center md:align-center md:flex-row md:text-left md:justify-center py-4 px-6 shadow md:items-center w-full">
       <Link to={"/"}>
         <div className="">
           <h1 className="text-2xl font-bold">Corrie's Blog</h1>
@@ -16,7 +18,7 @@ export default function Navbar({}) {
         </div>
       </Link>
 
-      <div className="hidden sm:flex sm:items-center mx-auto sm:ml-auto sm:mr-0 gap-4 md:gap-8">
+      <div className="hidden md:flex sm:items-center mx-auto sm:ml-auto sm:mr-0 gap-4 md:gap-8">
         <Link
           to={"/blogs"}
           className="text-2xl no-underline text-grey-darkest hover:text-blue-dark"
@@ -44,15 +46,15 @@ export default function Navbar({}) {
         >
           <img className="h-8 w-8 shrink-0" src={Linkedin} alt="" />
         </Link>
+
+        {auth.currentUser == null ? (
+          <GoogleLogInButton />
+        ) : (
+          <GoogleLogOutButton />
+        )}
       </div>
 
-      <DropDown login={signInWithGoogle} logout={logout} />
-      <button className="hidden sm:flex" onClick={signInWithGoogle}>
-        Login
-      </button>
-      <button className="hidden sm:flex" onClick={logout}>
-        Logout
-      </button>
+      <DropDown />
     </nav>
   );
 }

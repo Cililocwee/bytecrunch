@@ -4,15 +4,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import CommentInput from "./CommentInput";
 import CommentCard from "./CommentCard";
+import { db, getSpecificBlog } from "../../firebase";
 
-export default function DetailedBlog({ id, profile }) {
-  let ADDRESS;
-  if (import.meta.env.VITE_STATUS === "production") {
-    ADDRESS = import.meta.env.VITE_PRODUCTION_ADDRESS;
-  } else {
-    ADDRESS = import.meta.env.VITE_DEV_ADDRESS;
-  }
-
+export default function DetailedBlog({ id, user }) {
   const location = window.location.href.split("/blog/")[1];
   const navigate = useNavigate();
   Moment.locale("en");
@@ -35,61 +29,13 @@ export default function DetailedBlog({ id, profile }) {
 
   const [comments, setComments] = useState([]);
 
-  const fetchComments = async () => {
-    axios.get(ADDRESS + `/comments/${location}`).then((res) => {
-      setComments(res.data.reverse());
-    });
-  };
-
-  const fetchPost = async () => {
-    fetch(ADDRESS + `/blog/details/${location}`)
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      })
-      .then((jsonRes) => {
-        setBlog(jsonRes);
-      })
-      .catch((err) => console.error(err));
-  };
-
-  //!! This needs to update on submit, so the comments go live, but it's now
   useEffect(() => {
-    fetchPost();
-    fetchComments();
+    getSpecificBlog(db, location).then((results) => {
+      // console.log(results);
+      setBlog(results);
+    });
+    console.log("Detailed Blog Render");
   }, []);
-
-  function handleDelete() {
-    fetch(ADDRESS + `/blog/delete/${location}`, {
-      method: "Delete",
-    })
-      .then(async (res) => {
-        const data = await res.text();
-
-        // check for errors
-        if (!res.ok) {
-          // send error message
-          const error = (data && data.message) || res.status;
-          return Promise.reject(error);
-        }
-
-        navigate("/blogs");
-      })
-      .catch((err) => {
-        console.error("There was an error!", err);
-      });
-  }
-
-  function confirmDelete() {
-    if (confirm("Do you really want to delete this post?")) {
-      handleDelete();
-    }
-  }
-
-  function handleUpdate() {
-    navigate(`/update/${location}`);
-  }
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -103,28 +49,10 @@ export default function DetailedBlog({ id, profile }) {
         date_posted: new Date(),
       };
     });
-
-    // console.log(input);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-
-    if (input.comment_body < 1) {
-      alert("Comments must be more than 1 character!");
-    }
-
-    axios
-      .post(ADDRESS + "/comments/submit", input)
-      .catch((err) => console.log(err));
-
-    setInput({
-      username: "",
-      profile_picture_url: "",
-      comment_body: "",
-      date_posted: "",
-      associated_blog: location,
-    });
   }
 
   return (
@@ -142,7 +70,7 @@ export default function DetailedBlog({ id, profile }) {
             <p className="my-3 text-slate-400 text-sm">
               Posted: {Moment(blog.date_posted).calendar()}
             </p>
-            {profile?.id === import.meta.env.VITE_ADMIN_ID && (
+            {user?.uid === import.meta.env.VITE_ADMIN_ID && (
               <div className="flex align-items-center">
                 <button
                   onClick={handleUpdate}
@@ -162,7 +90,7 @@ export default function DetailedBlog({ id, profile }) {
         </div>
       )}
 
-      {profile && (
+      {user && (
         <CommentInput
           changefnc={handleChange}
           comment_body={input.comment_body}
@@ -177,9 +105,7 @@ export default function DetailedBlog({ id, profile }) {
           username={comment.username}
           profile_pic_url={comment.profile_pic_url}
           comment_id={comment._id}
-          admin_key={
-            profile ? profile?.id === import.meta.env.VITE_ADMIN_ID : false
-          }
+          admin_key={user ? user?.uid === import.meta.env.VITE_ADMIN_ID : false}
           key={crypto.randomUUID()}
         />
       ))}

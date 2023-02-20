@@ -6,6 +6,8 @@ import {
   query,
   where,
   addDoc,
+  getDoc,
+  doc,
 } from "firebase/firestore";
 import {
   getAuth,
@@ -37,11 +39,21 @@ const db = getFirestore(app);
 
 const provider = new GoogleAuthProvider();
 
+// get all blogs
 export async function getBlogs(db) {
   const blogsCol = collection(db, "blogs");
   const blogsSnapshot = await getDocs(blogsCol);
   const blogsList = blogsSnapshot.docs.map((doc) => doc.data());
-  return blogsList;
+  return blogsList.reverse();
+}
+
+// get one blog
+export async function getSpecificBlog(db, id) {
+  const blogRef = doc(db, "blogs", id);
+  const blogSnap = await getDoc(blogRef);
+  const blogResult = blogSnap.data();
+
+  return blogResult;
 }
 
 export function writeBlog(blogObj) {
@@ -52,22 +64,6 @@ export function writeBlog(blogObj) {
     date_posted: blogObj.date_posted,
   });
 }
-
-// !! This is bad, bad, bad don't use this
-// const signInWithGoogle = () => {
-//   signInWithPopup(auth, provider)
-//     .then((result) => {
-//       const name = result.user.displayName;
-//       const email = result.user.email;
-//       const profilePic = result.user.photoURL;
-//       console.log(result);
-
-//       localStorage.setItem("name", name),
-//         localStorage.setItem("email", email),
-//         localStorage.setItem("profilePic", profilePic);
-//     })
-//     .catch((err) => console.log(err));
-// };
 
 // Proper signInWithGoogle
 const signInWithGoogle = async () => {

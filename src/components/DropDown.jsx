@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { logout, signInWithGoogle } from "../../firebase";
 
-export default function DropDown({ login, logout, profile }) {
+export default function DropDown() {
   return (
-    <div className="block sm:hidden my-auto">
+    <div className="block  md:hidden my-auto">
       <div className="pl-10">
         <div className="dropdown inline-block relative">
           <button className="bg-stone-400 text-stone-100 font-semibold py-2 px-4 rounded inline-flex items-center">
@@ -37,7 +38,7 @@ export default function DropDown({ login, logout, profile }) {
             <li className="">
               {" "}
               <button
-                onClick={login}
+                onClick={signInWithGoogle}
                 className="w-full rounded-b bg-stone-300 hover:bg-stone-400 py-2 px-4 block whitespace-no-wrap"
                 href="#"
               >

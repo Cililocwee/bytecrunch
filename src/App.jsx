@@ -27,16 +27,16 @@ function App() {
       const data = doc.docs[0].data();
       setName(data.name);
     } catch (err) {
-      console.error(err);
-      // alert("An error occured while fetching user data");
+      console.error(err.message);
     }
   };
 
   useEffect(() => {
     if (loading) return;
     fetchUserName();
-    console.log(auth);
+    // console.log(auth);
     console.log("Fetch");
+    // console.log(user);
   }, [user, loading]);
 
   function login() {
@@ -55,7 +55,6 @@ function App() {
           login={login}
           logout={logOut}
         />
-        {/* <p>{`Logged in as ${name} - ${user?.email}`}</p> */}
         <Routes>
           <Route path="/" element={<Blogs />} />
           <Route path="/blogs" element={<Blogs />} />
@@ -69,11 +68,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
-        {profile?.id === import.meta.env.VITE_ADMIN_ID ? (
-          <FloatingCreate />
-        ) : (
-          ""
-        )}
+        {user?.uid === import.meta.env.VITE_ADMIN_ID ? <FloatingCreate /> : ""}
         <Footer />
       </Router>
     </div>

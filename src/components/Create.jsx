@@ -36,6 +36,7 @@ export default function Create({ user }) {
       content: blogObj.content,
       date_posted: blogObj.date_posted,
       title: blogObj.title,
+      id: blogObj.id,
     });
   }
 
@@ -59,8 +60,11 @@ export default function Create({ user }) {
 
     // TODO Refactor to FB
     // writeBlog(newBlog);
-    publishBlog(newBlog);
-    // navigate("/blogs");
+    publishBlog(newBlog)
+      .then(() => {
+        navigate("/blogs");
+      })
+      .catch((err) => console.log(err));
   }
 
   if (auth.currentUser === null) {

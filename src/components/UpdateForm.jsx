@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { db, getSpecificBlog } from "../../firebase";
+import { doc, updateDoc } from "firebase/firestore";
 
 export default function UpdateForm() {
   const location = window.location.href.split("/update/")[1];
@@ -15,16 +16,10 @@ export default function UpdateForm() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:3001/blog/details/${location}`)
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      })
-      .then((jsonRes) => {
-        setInput(jsonRes);
-      })
-      .catch((err) => console.error(err));
+    getSpecificBlog(db, location).then((results) => {
+      setInput(results);
+    });
+    console.log("Update blog render");
   }, []);
 
   function handleChange(event) {
@@ -49,26 +44,11 @@ export default function UpdateForm() {
       return;
     }
 
-    const updatedBlog = {
+    const blogRef = doc(db, "blogs", location);
+    await updateDoc(blogRef, {
       title: input.title,
       content: input.content,
-      date_posted: input.date_posted,
-    };
-
-    // Axios is love.
-    try {
-      await axios({
-        method: "put",
-        url: `http://localhost:3001/update/${location}`,
-        data: updatedBlog,
-      });
-    } catch (err) {
-      if ((err.repsonse.status = 404)) {
-        console.log("Resource could not be found");
-      } else {
-        console.log(err.message);
-      }
-    }
+    }).then(() => alert("Edit completed. Redirecting..."));
 
     navigate(`/blog/${location}`);
   }

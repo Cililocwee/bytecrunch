@@ -18,7 +18,7 @@ export default function Navbar({}) {
         </div>
       </Link>
 
-      <div className="hidden md:flex sm:items-center mx-auto sm:ml-auto sm:mr-0 gap-4 md:gap-8">
+      <div className="hidden md:flex sm:items-center mx-auto sm:ml-auto sm:mr-0 md:gap-4 lg:gap-8">
         <Link
           to={"/blogs"}
           className="text-2xl no-underline text-grey-darkest hover:text-blue-dark"

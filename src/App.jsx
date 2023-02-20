@@ -9,8 +9,6 @@ import Footer from "./components/Footer";
 import UpdateForm from "./components/UpdateForm";
 import FloatingCreate from "./components/FloatingCreate";
 import { useEffect, useState } from "react";
-import Login from "./components/Login";
-import Register from "./components/Register";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
@@ -50,23 +48,14 @@ function App() {
   return (
     <div className="flex flex-col justify-between h-screen">
       <Router>
-        <Navbar
-          username={profile !== null ? profile.name.split(" ")[0] : undefined}
-          login={login}
-          logout={logOut}
-        />
+        <Navbar />
         <Routes>
           <Route path="/" element={<Blogs />} />
           <Route path="/blogs" element={<Blogs />} />
-          <Route path="/create" element={<Create user={profile} />} />
-          <Route
-            path="/blog/:id"
-            element={<DetailedBlog profile={profile} />}
-          />
+          <Route path="/create" element={<Create />} />
+          <Route path="/blog/:id" element={<DetailedBlog />} />
           <Route path="/aboutme" element={<AboutMe />} />
           <Route path="/update/:id" element={<UpdateForm />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
         </Routes>
         {user?.uid === import.meta.env.VITE_ADMIN_ID ? <FloatingCreate /> : ""}
         <Footer />

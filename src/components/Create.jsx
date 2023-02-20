@@ -76,7 +76,6 @@ export default function Create({ user }) {
   } else if (auth.currentUser.uid === import.meta.env.VITE_ADMIN_ID) {
     return (
       <div className="flex flex-col items-center pt-3 pb-16 lg:pt-16 lg:pb-24  dark:bg-gray-900">
-        <button onClick={() => console.log(user)}>Click</button>
         <h1 className="text-5xl font-bold mt-0 mb-6">Post a new blog</h1>
         <form className="gap-5 items-stretch mb-3 w-96 flex flex-col">
           <div className="form-group">

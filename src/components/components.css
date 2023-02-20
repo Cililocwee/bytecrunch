@@ -1,14 +1,1 @@
-.Xblogcard {
-  background-color: aliceblue;
-  border: 1px solid black;
-  border-radius: 16px;
-  display: flex;
-  flex-direction: column;
-  padding: 2em;
-  width: fit-content;
-  /* max-width: 300px; */
-  flex-wrap: wrap;
-  box-sizing: border-box;
-  white-space: pre-wrap;
-  margin-bottom: 2em;
-}
+

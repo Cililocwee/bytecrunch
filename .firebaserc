@@ -1,5 +1,18 @@
 {
   "projects": {
     "default": "dev-blog-e4d2d"
-  }
+  },
+  "targets": {
+    "dev-blog-e4d2d": {
+      "hosting": {
+        "dev-blog-e4d2d": [
+          "corries-blog"
+        ],
+        "corries-devblog": [
+          "dev-blog-e4d2d"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

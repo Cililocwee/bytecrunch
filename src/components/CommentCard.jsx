@@ -1,5 +1,6 @@
 import React from "react";
 import Moment from "moment";
+import { auth } from "../../firebase";
 
 export default function CommentCard({
   comment_body,
@@ -18,18 +19,7 @@ export default function CommentCard({
   }
 
   function handleDelete() {
-    fetch(`http://localhost:3001/comments/delete/${comment_id}`, {
-      method: "Delete",
-    }).then(async (res) => {
-      const data = await res.text();
-
-      // check for errors
-      if (!res.ok) {
-        // report error
-        const error = (data && data.message) || res.status;
-        return Promise.reject(error);
-      }
-    });
+    alert("Delete!");
   }
 
   function confirmDelete() {
@@ -67,11 +57,12 @@ export default function CommentCard({
         {decodeHtml(comment_body)}
       </p>
       <div className="flex items-center mt-4 space-x-4"></div>
-      {admin_key && (
-        <button onClick={confirmDelete} className="flex ml-auto text-red-600">
-          Delete Comment
-        </button>
-      )}
+      {auth.currentUser &&
+        auth.currentUser.uid === import.meta.env.VITE_ADMIN_ID && (
+          <button onClick={confirmDelete} className="flex ml-auto text-red-600">
+            Delete Comment
+          </button>
+        )}
     </article>
   );
 }

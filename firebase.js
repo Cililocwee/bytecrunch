@@ -52,6 +52,17 @@ export async function getBlogs(db) {
   return sortedBlogsList;
 }
 
+// get comments associated with specific blog
+export async function getComments(db, id) {
+  const q = query(
+    collection(db, "comments"),
+    where("associated_blog", "==", id)
+  );
+  const commentSnap = await getDocs(q);
+
+  return commentSnap.docs.map((doc) => doc.data());
+}
+
 // get one blog
 export async function getSpecificBlog(db, id) {
   const blogRef = doc(db, "blogs", id);
@@ -91,55 +102,9 @@ const signInWithGoogle = async () => {
   }
 };
 
-// Sign in with email and password
-const logInWithEmailAndPassword = async (email, password) => {
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-  } catch (err) {
-    console.error(err);
-    alert(err.message);
-  }
-};
-
-// Register new user
-const registerWithEmailAndPassword = async (name, email, password) => {
-  try {
-    const res = await createUserWithEmailAndPassword(auth, email, password);
-    const user = res.user;
-    await addDoc(collection(db, "users"), {
-      uid: user.uid,
-      name,
-      authProvider: "local",
-      email,
-    });
-  } catch (err) {
-    console.error(err);
-    alert(err.message);
-  }
-};
-
-// Password reset via email
-const sendPasswordReset = async (email) => {
-  try {
-    await sendPasswordResetEmail(auth, email);
-    alert("Password reset link sent!");
-  } catch (err) {
-    console.error(err);
-    alert(err.message);
-  }
-};
-
 // Logout
 const logout = () => {
   signOut(auth);
 };
 
-export {
-  auth,
-  db,
-  signInWithGoogle,
-  logInWithEmailAndPassword,
-  registerWithEmailAndPassword,
-  sendPasswordReset,
-  logout,
-};
+export { auth, db, signInWithGoogle, logout };

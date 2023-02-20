@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import CommentInput from "./CommentInput";
 import CommentCard from "./CommentCard";
-import { auth, db, getSpecificBlog } from "../../firebase";
+import { auth, db, getComments, getSpecificBlog } from "../../firebase";
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
 
 export default function DetailedBlog({ id, user }) {
@@ -21,11 +21,7 @@ export default function DetailedBlog({ id, user }) {
   ]);
 
   const [input, setInput] = useState({
-    username: "",
-    profile_pic_url: "",
     comment_body: "",
-    date_posted: "",
-    associated_blog: location,
   });
 
   const [comments, setComments] = useState([]);
@@ -34,6 +30,9 @@ export default function DetailedBlog({ id, user }) {
     getSpecificBlog(db, location).then((results) => {
       // console.log(results);
       setBlog(results);
+    });
+    getComments(db, location).then((results) => {
+      setComments(results);
     });
     console.log("Detailed Blog Render");
   }, []);
@@ -47,21 +46,7 @@ export default function DetailedBlog({ id, user }) {
       return {
         ...prevInput,
         [name]: value,
-        username: auth.currentUser.displayName,
-        profile_pic_url: auth.currentUser.photoURL,
       };
-    });
-
-    console.log(input);
-  }
-
-  async function publishComment(commentObj) {
-    await setDoc(doc(db, "comments", commentObj.id), {
-      username: commentObj.username,
-      profile_pic_url: commentObj.profile_pic_url,
-      comment_body: commentObj.comment_body,
-      date_posted: commentObj.date_posted,
-      associated_blog: commentObj.associated_blog,
     });
   }
 
@@ -75,15 +60,6 @@ export default function DetailedBlog({ id, user }) {
       date_posted: new Date().toLocaleString(),
       associated_blog: location,
     }).then(() => alert("Posted"));
-    // const newComment = {
-    //   username: auth.currentUser.displayName,
-    //   profile_pic_url: auth.currentUser.photoURL,
-    //   comment_body: input.comment_body,
-    //   date_posted: new Date().toLocaleString(),
-    //   associated_blog: location,
-    // };
-
-    // publishComment(newComment).then(() => alert("Commented"));
   }
 
   // These functions are for the actual blog

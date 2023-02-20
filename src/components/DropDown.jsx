@@ -35,7 +35,22 @@ export default function DropDown({ login, logout, profile }) {
             </li>
 
             <li className="">
-              {profile ? (
+              {" "}
+              <button
+                onClick={login}
+                className="w-full rounded-b bg-stone-300 hover:bg-stone-400 py-2 px-4 block whitespace-no-wrap"
+                href="#"
+              >
+                Log In
+              </button>
+              <button
+                onClick={logout}
+                className="w-full rounded-b bg-stone-300 hover:bg-stone-400 py-2 px-4 block whitespace-no-wrap"
+                href="#"
+              >
+                Log Out
+              </button>
+              {/* {profile ? (
                 <button
                   onClick={logout}
                   className="w-full rounded-b bg-stone-300 hover:bg-stone-400 py-2 px-4 block whitespace-no-wrap"
@@ -51,7 +66,7 @@ export default function DropDown({ login, logout, profile }) {
                 >
                   Log In
                 </button>
-              )}
+              )} */}
             </li>
             <li className=""></li>
           </ul>

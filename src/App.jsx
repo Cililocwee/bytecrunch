@@ -8,47 +8,44 @@ import AboutMe from "./components/AboutMe";
 import Footer from "./components/Footer";
 import UpdateForm from "./components/UpdateForm";
 import FloatingCreate from "./components/FloatingCreate";
-import { GoogleLogin, googleLogout, useGoogleLogin } from "@react-oauth/google";
-import axios from "axios";
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useState } from "react";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth, db } from "../firebase";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 function App() {
-  const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
 
-  const login = useGoogleLogin({
-    onSuccess: (codeResponse) => setUser(codeResponse),
-    onError: (err) => console.log("Login failed: ", err),
-  });
-
-  useEffect(() => {
-    if (user) {
-      axios
-        .get(
-          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
-          {
-            headers: {
-              Authorization: `Bearer ${user.access_token}`,
-              Accept: "application/json",
-            },
-          }
-        )
-        .then((res) => {
-          setProfile(res.data);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [user]);
-
-  const logOut = () => {
-    if (confirm("Are you sure you want to log out?")) {
-      googleLogout();
-      setProfile(null);
-      setUser(null);
+  const [user, loading, error] = useAuthState(auth);
+  const [name, setName] = useState("Guest");
+  const fetchUserName = async () => {
+    try {
+      const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+      const doc = await getDocs(q);
+      const data = doc.docs[0].data();
+      setName(data.name);
+    } catch (err) {
+      console.error(err);
+      alert("An error occured while fetching user data");
     }
   };
+
+  useEffect(() => {
+    if (loading) return;
+    fetchUserName();
+    console.log(auth);
+    console.log("Fetch");
+  }, [user, loading]);
+
+  function login() {
+    return;
+  }
+
+  function logOut() {
+    return;
+  }
 
   return (
     <div className="flex flex-col justify-between h-screen">
@@ -58,6 +55,7 @@ function App() {
           login={login}
           logout={logOut}
         />
+        <p>{`Logged in as ${name} - ${user?.email}`}</p>
         <Routes>
           <Route path="/" element={<Blogs />} />
           <Route path="/blogs" element={<Blogs />} />

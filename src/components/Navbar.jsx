@@ -1,22 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import Github from "../assets/github.png";
 import Linkedin from "../assets/linkedin.png";
 import DropDown from "./DropDown";
+import { logout, signInWithGoogle } from "../../firebase";
 
-export default function Navbar({ username, login, logout }) {
-  const greeting = ["Howdy", "Hi there", "Welcome", "Greetings", "Hello"];
-  const [userGreeting, setUserGreeting] = useState("");
-
-  useEffect(() => {
-    setUserGreeting(randomGreeting());
-  }, []);
-
-  function randomGreeting() {
-    return greeting[Math.floor(Math.random() * greeting.length)];
-  }
-
+export default function Navbar({}) {
   return (
     <nav className="font-sans flex justify-between text-center sm:align-center sm:flex-row sm:text-left sm:justify-center py-4 px-6 shadow sm:items-center w-full">
       <Link to={"/"}>
@@ -54,32 +44,15 @@ export default function Navbar({ username, login, logout }) {
         >
           <img className="h-8 w-8 shrink-0" src={Linkedin} alt="" />
         </Link>
-        <div>
-          {username ? (
-            <button
-              onClick={logout}
-              className="w-40 peer px-3 py-2 bg-stone-500 hover:bg-stone-700 text-stone-200"
-            >
-              {`${userGreeting}, ${username}`}
-              <br />
-              Click here to log out
-            </button>
-          ) : (
-            <button
-              onClick={() => login()}
-              className="w-40 peer px-3 py-2 bg-stone-500 hover:bg-stone-700 text-stone-200"
-            >
-              Click here to sign in and comment
-            </button>
-          )}
-        </div>
       </div>
-      {/* TODO: Update dropdown menu! */}
-      <DropDown
-        login={() => login()}
-        logout={logout}
-        profile={username ? true : false}
-      />
+
+      <DropDown login={signInWithGoogle} logout={logout} />
+      <button className="hidden sm:flex" onClick={signInWithGoogle}>
+        Login
+      </button>
+      <button className="hidden sm:flex" onClick={logout}>
+        Logout
+      </button>
     </nav>
   );
 }

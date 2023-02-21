@@ -40,7 +40,7 @@ export default function CommentCard({
             />
             {username}
           </p>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+          <p className="text-sm text-gray-600 ">
             <time pubdate="" dateTime="2022-02-08" title="February 8th, 2022">
               {Moment(date_posted).calendar()}
             </time>
@@ -53,9 +53,7 @@ export default function CommentCard({
           type="button"
         ></button>
       </footer>
-      <p className="text-gray-500 dark:text-gray-400">
-        {decodeHtml(comment_body)}
-      </p>
+      <p className="text-gray-500 ">{decodeHtml(comment_body)}</p>
       <div className="flex items-center mt-4 space-x-4"></div>
       {auth.currentUser &&
         auth.currentUser.uid === import.meta.env.VITE_ADMIN_ID && (

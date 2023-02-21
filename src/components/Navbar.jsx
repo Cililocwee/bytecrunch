@@ -1,12 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Navbar.css";
 import Github from "../assets/github.png";
 import Linkedin from "../assets/linkedin.png";
 import DropDown from "./DropDown";
-import { auth, logout, signInWithGoogle } from "../../firebase";
-import GoogleLogInButton from "./GoogleLogInButton";
-import GoogleLogOutButton from "./GoogleLogOutButton";
 import CustomGoogleButton from "./CustomGoogleButton";
 
 export default function Navbar({}) {

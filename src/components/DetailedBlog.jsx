@@ -4,7 +4,13 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import CommentInput from "./CommentInput";
 import CommentCard from "./CommentCard";
-import { auth, db, getComments, getSpecificBlog } from "../../firebase";
+import {
+  auth,
+  db,
+  getComments,
+  getSpecificBlog,
+  writeComment,
+} from "../../firebase";
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
 
 export default function DetailedBlog({ id, user }) {
@@ -24,6 +30,8 @@ export default function DetailedBlog({ id, user }) {
     comment_body: "",
   });
 
+  const [commentTrigger, setCommentTrigger] = useState(false);
+
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
@@ -35,7 +43,7 @@ export default function DetailedBlog({ id, user }) {
       setComments(results);
     });
     console.log("Detailed Blog Render");
-  }, []);
+  }, [commentTrigger]);
 
   // Change and submit functions are for comments
   // TODO Consider separate component
@@ -53,13 +61,21 @@ export default function DetailedBlog({ id, user }) {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    await setDoc(doc(db, "comments", crypto.randomUUID()), {
+    // TODO I don't like the POST methods being here
+    const id = crypto.randomUUID();
+    await setDoc(doc(db, "comments", id), {
       username: auth.currentUser.displayName,
       profile_pic_url: auth.currentUser.photoURL,
       comment_body: input.comment_body,
       date_posted: new Date().toLocaleString(),
       associated_blog: location,
-    }).then(() => alert("Posted"));
+      id: id,
+    })
+      .then(() => alert("Posted"))
+      .then(() => {
+        setInput({ comment_body: "" });
+        setCommentTrigger(!commentTrigger);
+      });
   }
 
   // These functions are for the actual blog
@@ -126,7 +142,7 @@ export default function DetailedBlog({ id, user }) {
           date_posted={comment.date_posted}
           username={comment.username}
           profile_pic_url={comment.profile_pic_url}
-          comment_id={comment._id}
+          comment_id={comment.id}
           admin_key={user ? user?.uid === import.meta.env.VITE_ADMIN_ID : false}
           key={crypto.randomUUID()}
         />

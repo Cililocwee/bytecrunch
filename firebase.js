@@ -8,6 +8,7 @@ import {
   addDoc,
   getDoc,
   doc,
+  setDoc,
 } from "firebase/firestore";
 import {
   getAuth,
@@ -40,7 +41,8 @@ const db = getFirestore(app);
 
 const provider = new GoogleAuthProvider();
 
-// get all blogs
+// --- CRUD FUNCTIONS --- //
+// all blogs GET
 export async function getBlogs(db) {
   const blogsCol = collection(db, "blogs");
   const blogsSnapshot = await getDocs(blogsCol);
@@ -52,7 +54,27 @@ export async function getBlogs(db) {
   return sortedBlogsList;
 }
 
-// get comments associated with specific blog
+// one blog GET
+export async function getSpecificBlog(db, id) {
+  const blogRef = doc(db, "blogs", id);
+  const blogSnap = await getDoc(blogRef);
+  const blogResult = blogSnap.data();
+
+  return blogResult;
+}
+
+// blog POST
+// TODO Unimplemented
+export async function writeBlog(blogObj) {
+  const db = getDatabase();
+  await set(ref(db, "blogs/" + blogObj.id), {
+    title: blogObj.title,
+    content: blogObj.content,
+    date_posted: blogObj.date_posted,
+  });
+}
+
+// all comments GET
 export async function getComments(db, id) {
   const q = query(
     collection(db, "comments"),
@@ -63,24 +85,21 @@ export async function getComments(db, id) {
   return commentSnap.docs.map((doc) => doc.data());
 }
 
-// get one blog
-export async function getSpecificBlog(db, id) {
-  const blogRef = doc(db, "blogs", id);
-  const blogSnap = await getDoc(blogRef);
-  const blogResult = blogSnap.data();
-
-  return blogResult;
+// one comment POST
+// TODO Unimplemented
+export async function writeComment(commentObj) {
+  await setDoc(doc(db, "comments", crypto.randomUUID()), {
+    username: auth.currentUser.displayName,
+    profile_pic_url: commentObj.photoURL,
+    comment_body: commentObj.comment_body,
+    date_posted: commentObj.date_posted,
+    associated_blog: commentObj.associated_blog,
+  })
+    .then(() => alert("Posted"))
+    .catch((err) => console.log(err));
 }
 
-export function writeBlog(blogObj) {
-  const db = getDatabase();
-  set(ref(db, "blogs/" + blogObj.id), {
-    title: blogObj.title,
-    content: blogObj.content,
-    date_posted: blogObj.date_posted,
-  });
-}
-
+// --- GOOGLE AUTH --- //
 // Proper signInWithGoogle
 const signInWithGoogle = async () => {
   try {

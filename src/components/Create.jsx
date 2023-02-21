@@ -31,6 +31,7 @@ export default function Create({ user }) {
     setDate(new Date().toLocaleString());
   }
 
+  //TODO I don't like the POST method being here
   async function publishBlog(blogObj) {
     await setDoc(doc(db, "blogs", blogObj.id), {
       content: blogObj.content,

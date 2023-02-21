@@ -1,6 +1,7 @@
 import React from "react";
 import Moment from "moment";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
+import { deleteDoc, doc } from "firebase/firestore";
 
 export default function CommentCard({
   comment_body,
@@ -8,7 +9,6 @@ export default function CommentCard({
   profile_pic_url,
   username,
   comment_id,
-  admin_key,
 }) {
   Moment.locale("en");
 
@@ -18,13 +18,13 @@ export default function CommentCard({
     return txt.value;
   }
 
-  function handleDelete() {
-    alert("Delete!");
-  }
-
-  function confirmDelete() {
-    if (confirm(`Delete comment ${comment_id}: ${comment_body}?`)) {
-      handleDelete();
+  async function confirmDelete() {
+    if (confirm("Delete?")) {
+      await deleteDoc(doc(db, "comments", comment_id)).then(() => {
+        alert("Comment deleted...");
+        // TODO This isn't an optimal solution for this
+        // location.reload();
+      });
     }
   }
 

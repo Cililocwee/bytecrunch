@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { logout, signInWithGoogle } from "../../firebase";
 import CustomGoogleButton from "./CustomGoogleButton";
 
 export default function DropDown() {
@@ -36,25 +35,9 @@ export default function DropDown() {
               </Link>
             </li>
 
-            <li className="">
-              {" "}
-              {/* <button
-                onClick={signInWithGoogle}
-                className="w-full rounded-b bg-stone-300 hover:bg-stone-400 py-2 px-4 block whitespace-no-wrap"
-                href="#"
-              >
-                Log In
-              </button>
-              <button
-                onClick={logout}
-                className="w-full rounded-b bg-stone-300 hover:bg-stone-400 py-2 px-4 block whitespace-no-wrap"
-                href="#"
-              >
-                Log Out
-              </button> */}
+            <li>
               <CustomGoogleButton />
             </li>
-            <li className=""></li>
           </ul>
         </div>
       </div>

@@ -70,12 +70,12 @@ export default function DetailedBlog({ id, user }) {
       date_posted: new Date().toLocaleString(),
       associated_blog: location,
       id: id,
-    })
-      .then(() => alert("Posted"))
-      .then(() => {
-        setInput({ comment_body: "" });
-        setCommentTrigger(!commentTrigger);
-      });
+    }).then(() => {
+      setInput({ comment_body: "" });
+      setCommentTrigger(!commentTrigger);
+    });
+
+    // .then(() => alert("Posted"))
   }
 
   // These functions are for the actual blog

@@ -1,7 +1,7 @@
 import { doc, setDoc } from "firebase/firestore";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth, db, writeBlog } from "../../firebase";
+import { auth, db } from "../../firebase";
 
 export default function Create({ user }) {
   const [input, setInput] = useState({
@@ -59,8 +59,6 @@ export default function Create({ user }) {
       id: crypto.randomUUID(),
     };
 
-    // TODO Refactor to FB
-    // writeBlog(newBlog);
     publishBlog(newBlog)
       .then(() => {
         navigate("/blogs");

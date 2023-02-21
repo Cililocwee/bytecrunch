@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./components.css";
 import Moment from "moment";
 import { Link } from "react-router-dom";
 import { db, getBlogs } from "../../firebase";

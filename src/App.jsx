@@ -14,10 +14,8 @@ import { auth, db } from "../firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 
 function App() {
-  const [profile, setProfile] = useState(null);
-
   const [user, loading, error] = useAuthState(auth);
-  const [name, setName] = useState("Guest");
+
   const fetchUserName = async () => {
     try {
       const q = query(collection(db, "users"), where("uid", "==", user?.uid));
@@ -29,21 +27,13 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    if (loading) return;
-    fetchUserName();
-    // console.log(auth);
-    console.log("Fetch");
-    // console.log(user);
-  }, [user, loading]);
-
-  function login() {
-    return;
-  }
-
-  function logOut() {
-    return;
-  }
+  // useEffect(() => {
+  //   if (loading) return;
+  //   fetchUserName();
+  //   // console.log(auth);
+  //   console.log("Fetch");
+  //   // console.log(user);
+  // }, [user, loading]);
 
   return (
     <div className="flex flex-col justify-between h-screen">
@@ -57,7 +47,12 @@ function App() {
           <Route path="/aboutme" element={<AboutMe />} />
           <Route path="/update/:id" element={<UpdateForm />} />
         </Routes>
-        {user?.uid === import.meta.env.VITE_ADMIN_ID ? <FloatingCreate /> : ""}
+        {auth.currentUser !== null &&
+        auth.currentUser.uid === import.meta.env.VITE_ADMIN_ID ? (
+          <FloatingCreate />
+        ) : (
+          ""
+        )}
         <Footer />
       </Router>
     </div>

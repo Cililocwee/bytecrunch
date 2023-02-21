@@ -7,6 +7,7 @@ import DropDown from "./DropDown";
 import { auth, logout, signInWithGoogle } from "../../firebase";
 import GoogleLogInButton from "./GoogleLogInButton";
 import GoogleLogOutButton from "./GoogleLogOutButton";
+import CustomGoogleButton from "./CustomGoogleButton";
 
 export default function Navbar({}) {
   return (
@@ -47,11 +48,7 @@ export default function Navbar({}) {
           <img className="h-8 w-8 shrink-0" src={Linkedin} alt="" />
         </Link>
 
-        {auth.currentUser == null ? (
-          <GoogleLogInButton />
-        ) : (
-          <GoogleLogOutButton />
-        )}
+        <CustomGoogleButton />
       </div>
 
       <DropDown />

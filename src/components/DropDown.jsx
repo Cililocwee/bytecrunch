@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { logout, signInWithGoogle } from "../../firebase";
+import CustomGoogleButton from "./CustomGoogleButton";
 
 export default function DropDown() {
   return (
@@ -37,7 +38,7 @@ export default function DropDown() {
 
             <li className="">
               {" "}
-              <button
+              {/* <button
                 onClick={signInWithGoogle}
                 className="w-full rounded-b bg-stone-300 hover:bg-stone-400 py-2 px-4 block whitespace-no-wrap"
                 href="#"
@@ -50,24 +51,8 @@ export default function DropDown() {
                 href="#"
               >
                 Log Out
-              </button>
-              {/* {profile ? (
-                <button
-                  onClick={logout}
-                  className="w-full rounded-b bg-stone-300 hover:bg-stone-400 py-2 px-4 block whitespace-no-wrap"
-                  href="#"
-                >
-                  Log Out
-                </button>
-              ) : (
-                <button
-                  onClick={login}
-                  className="w-full rounded-b bg-stone-300 hover:bg-stone-400 py-2 px-4 block whitespace-no-wrap"
-                  href="#"
-                >
-                  Log In
-                </button>
-              )} */}
+              </button> */}
+              <CustomGoogleButton />
             </li>
             <li className=""></li>
           </ul>

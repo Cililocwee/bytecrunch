@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <div className="text-sm sm:text-base mx-auto flex flex-col items-center justify-center pb-5 w-full box-border">
+    <div className="pb-24 text-sm sm:text-base mx-auto flex flex-col items-center justify-center sm:pb-5 w-full box-border">
       <p className="">
         © Corrie Stroup, 2023 |{" "}
         <a href="mailto:corrie.stroup@gmail.com" className="underline">

@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import UpdateForm from "./components/UpdateForm";
 import FloatingCreate from "./components/FloatingCreate";
 import { auth } from "../firebase";
+import Contact from "./components/Contact";
 
 function App() {
   return (
@@ -20,8 +21,9 @@ function App() {
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/create" element={<Create />} />
           <Route path="/blog/:id" element={<DetailedBlog />} />
-          <Route path="/aboutme" element={<AboutMe />} />
+          <Route path="/about" element={<AboutMe />} />
           <Route path="/update/:id" element={<UpdateForm />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
         {auth.currentUser !== null &&
         auth.currentUser.uid === import.meta.env.VITE_ADMIN_ID ? (

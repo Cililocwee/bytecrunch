@@ -10,6 +10,7 @@ import UpdateForm from "./components/UpdateForm";
 import FloatingCreate from "./components/FloatingCreate";
 import { auth } from "../firebase";
 import Contact from "./components/Contact";
+import MobileNav from "./components/MobileNav";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         ) : (
           ""
         )}
+        <MobileNav />
         <Footer />
       </Router>
     </div>

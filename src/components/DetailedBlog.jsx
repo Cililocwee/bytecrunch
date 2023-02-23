@@ -12,6 +12,7 @@ import {
   writeComment,
 } from "../../firebase";
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
+import CustomGoogleButton from "./CustomGoogleButton";
 
 export default function DetailedBlog({ id, user }) {
   const location = window.location.href.split("/blog/")[1];
@@ -129,6 +130,8 @@ export default function DetailedBlog({ id, user }) {
           </div>
         </div>
       )}
+
+      <CustomGoogleButton />
 
       <CommentInput
         changefnc={handleChange}

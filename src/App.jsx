@@ -28,7 +28,7 @@ function App() {
           <Route path="/update/:id" element={<UpdateForm />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
-        {auth.currentUser !== null &&
+        {auth.currentUser &&
         auth.currentUser.uid === import.meta.env.VITE_ADMIN_ID ? (
           <FloatingCreate />
         ) : (

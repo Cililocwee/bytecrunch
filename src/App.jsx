@@ -11,11 +11,13 @@ import FloatingCreate from "./components/FloatingCreate";
 import { auth } from "../firebase";
 import Contact from "./components/Contact";
 import MobileNav from "./components/MobileNav";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <div className="flex flex-col justify-between h-screen">
       <Router>
+        <ScrollToTop />
         <Navbar />
         <Routes>
           <Route path="/" element={<Blogs />} />

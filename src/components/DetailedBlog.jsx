@@ -11,7 +11,6 @@ export default function DetailedBlog() {
   const location = window.location.href.split("/blog/")[1];
   const navigate = useNavigate();
   Moment.locale("en");
-
   const [blog, setBlog] = useState([
     {
       title: "Loading",
@@ -19,14 +18,12 @@ export default function DetailedBlog() {
       date_posted: "",
     },
   ]);
-
   const [input, setInput] = useState({
     comment_body: "",
   });
 
   // Tracks changes to comments and rerenders on post or delete
   const [commentTrigger, setCommentTrigger] = useState(false);
-
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
@@ -69,8 +66,6 @@ export default function DetailedBlog() {
       setInput({ comment_body: "" });
       setCommentTrigger(!commentTrigger);
     });
-
-    // .then(() => alert("Posted"))
   }
 
   // These functions are for the actual blog
@@ -125,7 +120,7 @@ export default function DetailedBlog() {
         </div>
       )}
 
-      <CustomGoogleButton />
+      {/* <CustomGoogleButton /> */}
 
       <CommentInput
         changefnc={handleChange}

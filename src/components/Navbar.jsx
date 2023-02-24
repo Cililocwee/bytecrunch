@@ -1,12 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Github from "../assets/github.png";
-import Linkedin from "../assets/linkedin.png";
-import DropDown from "./DropDown";
-import CustomGoogleButton from "./CustomGoogleButton";
 import { auth } from "../../firebase";
+import CustomGoogleButton from "./CustomGoogleButton";
 
-export default function Navbar({}) {
+export default function Navbar() {
   return (
     <nav className="h-9 p-0 m-0 box-border justify-center sm:h-fit font-sans flex sm:justify-between text-center md:align-center md:flex-row md:text-left md:justify-center sm:py-4 sm:px-6 shadow md:items-center w-full">
       <Link to={"/"}>
@@ -39,15 +36,7 @@ export default function Navbar({}) {
         >
           Contact
         </Link>
-        {auth.currentUser &&
-          auth.currentUser.uid === import.meta.env.VITE_ADMIN_ID && (
-            <Link
-              to={"/contact"}
-              className="text-2xl no-underline text-grey-darkest hover:text-blue-dark"
-            >
-              Create
-            </Link>
-          )}
+        <CustomGoogleButton />
       </div>
     </nav>
   );

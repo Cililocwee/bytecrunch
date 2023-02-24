@@ -1,5 +1,5 @@
 import { doc, setDoc } from "firebase/firestore";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, db } from "../../firebase";
 
@@ -12,12 +12,13 @@ export default function Create({ user }) {
   const [date, setDate] = useState();
 
   const navigate = useNavigate();
-
-  if (auth.currentUser == null) {
-    navigate("/");
-  } else if (auth.currentUser.uid !== import.meta.env.VITE_ADMIN_ID) {
-    navigate("/");
-  }
+  useEffect(() => {
+    if (auth.currentUser == null) {
+      navigate("/");
+    } else if (auth.currentUser.uid !== import.meta.env.VITE_ADMIN_ID) {
+      navigate("/");
+    }
+  }, []);
 
   function handleChange(event) {
     const { name, value } = event.target;

@@ -7,12 +7,9 @@ import DetailedBlog from "./components/DetailedBlog";
 import AboutMe from "./components/AboutMe";
 import Footer from "./components/Footer";
 import UpdateForm from "./components/UpdateForm";
-import FloatingCreate from "./components/FloatingCreate";
-import { auth } from "../firebase";
 import Contact from "./components/Contact";
 import MobileNav from "./components/MobileNav";
 import ScrollToTop from "./components/ScrollToTop";
-import { useEffect, useState } from "react";
 
 function App() {
   return (
@@ -22,7 +19,6 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Blogs />} />
-          <Route path="/blogs" element={<Blogs />} />
           <Route path="/create" element={<Create />} />
           <Route path="/blog/:id" element={<DetailedBlog />} />
           <Route path="/about" element={<AboutMe />} />
@@ -30,12 +26,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/*" element={<Blogs />} />
         </Routes>
-        {auth.currentUser &&
-        auth.currentUser.uid === import.meta.env.VITE_ADMIN_ID ? (
-          <FloatingCreate />
-        ) : (
-          ""
-        )}
+        {/* <FloatingCreate /> */}
         <MobileNav />
         <Footer />
       </Router>

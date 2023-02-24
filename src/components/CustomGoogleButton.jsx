@@ -4,9 +4,10 @@ import { auth, logout, signInWithGoogle } from "../../firebase";
 export default function CustomGoogleButton() {
   const [user, setUser] = useState(null);
 
+  // Reacquires informtion on reload
   useEffect(() => {
     if (auth.currentUser) {
-      setUser(auth.currentUser.displayName.split(" ")[0]);
+      setUser(auth.currentUser);
     } else {
       setUser(null);
     }
@@ -14,12 +15,11 @@ export default function CustomGoogleButton() {
 
   async function handleClick() {
     if (auth.currentUser === null) {
-      signInWithGoogle().then(() =>
-        setUser(auth.currentUser.displayName.split(" ")[0])
-      );
+      signInWithGoogle().then(() => setUser(auth.currentUser));
     } else {
       logout();
       setUser(null);
+      location.reload();
     }
   }
 
@@ -51,7 +51,9 @@ export default function CustomGoogleButton() {
           d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"
         />
       </svg>
-      {user !== null ? `Signed in as ${user}` : "Log in to comment"}
+      {user !== null
+        ? `Hi, ${auth.currentUser?.displayName.split(" ")[0]}`
+        : "Log In"}
     </button>
   );
 }

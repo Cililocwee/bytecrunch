@@ -4,6 +4,7 @@ import Github from "../assets/github.png";
 import Linkedin from "../assets/linkedin.png";
 import DropDown from "./DropDown";
 import CustomGoogleButton from "./CustomGoogleButton";
+import { auth } from "../../firebase";
 
 export default function Navbar({}) {
   return (
@@ -19,7 +20,7 @@ export default function Navbar({}) {
 
       <div className="hidden sm:flex sm:gap-4 sm:items-center mx-auto sm:ml-auto sm:mr-0 md:gap-4 lg:gap-8">
         <Link
-          to={"/blogs"}
+          to={"/"}
           className="text-2xl no-underline text-grey-darkest hover:text-blue-dark"
         >
           Posts
@@ -38,6 +39,15 @@ export default function Navbar({}) {
         >
           Contact
         </Link>
+        {auth.currentUser &&
+          auth.currentUser.uid === import.meta.env.VITE_ADMIN_ID && (
+            <Link
+              to={"/contact"}
+              className="text-2xl no-underline text-grey-darkest hover:text-blue-dark"
+            >
+              Create
+            </Link>
+          )}
       </div>
     </nav>
   );

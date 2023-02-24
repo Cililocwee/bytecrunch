@@ -6,7 +6,7 @@ export default function MobileNav() {
     <div className="relative sm:hidden">
       <ul className="flex fixed bottom-0 w-full h-16 items-center justify-evenly bg-stone-400">
         <li>
-          <Link to={"/blogs"}>
+          <Link to={"/"}>
             <h2 className="text-xl font-bold">Blogs</h2>
           </Link>
         </li>

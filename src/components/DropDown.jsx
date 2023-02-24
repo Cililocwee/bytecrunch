@@ -33,7 +33,7 @@ export default function DropDown() {
             <li className="">
               <Link
                 className="w-full mt-36 rounded-t bg-stone-300 hover:bg-stone-400 py-2 px-4 block whitespace-no-wrap"
-                to="/blogs"
+                to="/"
               >
                 Posts
               </Link>

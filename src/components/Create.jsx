@@ -14,9 +14,9 @@ export default function Create({ user }) {
   const navigate = useNavigate();
 
   if (auth.currentUser == null) {
-    navigate("/blogs");
+    navigate("/");
   } else if (auth.currentUser.uid !== import.meta.env.VITE_ADMIN_ID) {
-    navigate("/blogs");
+    navigate("/");
   }
 
   function handleChange(event) {
@@ -61,7 +61,7 @@ export default function Create({ user }) {
 
     publishBlog(newBlog)
       .then(() => {
-        navigate("/blogs");
+        navigate("/");
       })
       .catch((err) => console.log(err));
   }

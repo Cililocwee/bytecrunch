@@ -1,20 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Moment from "moment";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import CommentInput from "./CommentInput";
 import CommentCard from "./CommentCard";
-import {
-  auth,
-  db,
-  getComments,
-  getSpecificBlog,
-  writeComment,
-} from "../../firebase";
+import { auth, db, getComments, getSpecificBlog } from "../../firebase";
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import CustomGoogleButton from "./CustomGoogleButton";
 
-export default function DetailedBlog({ id, user }) {
+export default function DetailedBlog() {
   const location = window.location.href.split("/blog/")[1];
   const navigate = useNavigate();
   Moment.locale("en");
@@ -90,7 +83,7 @@ export default function DetailedBlog({ id, user }) {
     if (confirm("Delete?")) {
       await deleteDoc(doc(db, "blogs", location)).then(() => {
         alert("Blog deleted. Redirecting...");
-        navigate("/blogs");
+        navigate("/");
       });
     }
   }
@@ -146,7 +139,6 @@ export default function DetailedBlog({ id, user }) {
           username={comment.username}
           profile_pic_url={comment.profile_pic_url}
           comment_id={comment.id}
-          admin_key={user ? user?.uid === import.meta.env.VITE_ADMIN_ID : false}
           key={crypto.randomUUID()}
         />
       ))}

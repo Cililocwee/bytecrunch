@@ -12,6 +12,7 @@ import { auth } from "../firebase";
 import Contact from "./components/Contact";
 import MobileNav from "./components/MobileNav";
 import ScrollToTop from "./components/ScrollToTop";
+import { useEffect, useState } from "react";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/about" element={<AboutMe />} />
           <Route path="/update/:id" element={<UpdateForm />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/*" element={<Blogs />} />
         </Routes>
         {auth.currentUser &&
         auth.currentUser.uid === import.meta.env.VITE_ADMIN_ID ? (

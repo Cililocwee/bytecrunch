@@ -1,8 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { auth, logout, signInWithGoogle } from "../../firebase";
 
 export default function CustomGoogleButton() {
   const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    if (auth.currentUser) {
+      setUser(auth.currentUser.displayName.split(" ")[0]);
+    } else {
+      setUser(null);
+    }
+  }, [auth.currentUser]);
 
   async function handleClick() {
     if (auth.currentUser === null) {

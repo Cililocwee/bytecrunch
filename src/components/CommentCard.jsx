@@ -9,6 +9,7 @@ export default function CommentCard({
   profile_pic_url,
   username,
   comment_id,
+  deletecheck,
 }) {
   Moment.locale("en");
 
@@ -22,6 +23,7 @@ export default function CommentCard({
     if (confirm("Delete?")) {
       await deleteDoc(doc(db, "comments", comment_id)).then(() => {
         alert("Comment deleted...");
+        deletecheck[1](!deletecheck[0]);
         // TODO This isn't an optimal solution for this
         // location.reload();
       });

@@ -24,6 +24,7 @@ export default function DetailedBlog() {
     comment_body: "",
   });
 
+  // Tracks changes to comments and rerenders on post or delete
   const [commentTrigger, setCommentTrigger] = useState(false);
 
   const [comments, setComments] = useState([]);
@@ -139,6 +140,7 @@ export default function DetailedBlog() {
           username={comment.username}
           profile_pic_url={comment.profile_pic_url}
           comment_id={comment.id}
+          deletecheck={[commentTrigger, setCommentTrigger]}
           key={crypto.randomUUID()}
         />
       ))}

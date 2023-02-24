@@ -29,9 +29,6 @@ export default function DetailedBlog() {
       date_posted: "",
     },
   ]);
-  const [input, setInput] = useState({
-    comment_body: "",
-  });
 
   // Tracks changes to comments and rerenders on post or delete
   const [commentTrigger, setCommentTrigger] = useState(false);
@@ -47,37 +44,6 @@ export default function DetailedBlog() {
     });
     console.log("Detailed Blog Render");
   }, [commentTrigger]);
-
-  // Change and submit functions are for comments
-  // TODO Consider separate component
-  function handleChange(event) {
-    const { name, value } = event.target;
-
-    setInput((prevInput) => {
-      return {
-        ...prevInput,
-        [name]: value,
-      };
-    });
-  }
-
-  async function handleSubmit(event) {
-    event.preventDefault();
-
-    // TODO I don't like the POST methods being here
-    const id = crypto.randomUUID();
-    await setDoc(doc(db, "comments", id), {
-      username: auth.currentUser.displayName,
-      profile_pic_url: auth.currentUser.photoURL,
-      comment_body: input.comment_body,
-      date_posted: new Date().toLocaleString(),
-      associated_blog: location,
-      id: id,
-    }).then(() => {
-      setInput({ comment_body: "" });
-      setCommentTrigger(!commentTrigger);
-    });
-  }
 
   // These functions are for the actual blog
   function handleEdit() {
@@ -133,9 +99,8 @@ export default function DetailedBlog() {
       {/* <CustomGoogleButton /> */}
 
       <CommentInput
-        changefnc={handleChange}
-        comment_body={input.comment_body}
-        submitfnc={handleSubmit}
+        blog={location}
+        trigger={[commentTrigger, setCommentTrigger]}
       />
 
       {comments.map((comment) => (

@@ -5,9 +5,20 @@ import CommentInput from "./CommentInput";
 import CommentCard from "./CommentCard";
 import { auth, db, getComments, getSpecificBlog } from "../../firebase";
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
-import CustomGoogleButton from "./CustomGoogleButton";
+import { onAuthStateChanged } from "firebase/auth";
 
 export default function DetailedBlog() {
+  /* Even this isn't rerendering the page on auth change,
+  for the user it doesn't matter, but for the admin its annoying */
+  const [adminFlag, setAdminFlag] = useState(false);
+  onAuthStateChanged(auth, (user) => {
+    if (user?.uid === import.meta.env.VITE_ADMIN_ID) {
+      setAdminFlag(true);
+    } else {
+      setAdminFlag(false);
+    }
+  });
+
   const location = window.location.href.split("/blog/")[1];
   const navigate = useNavigate();
   Moment.locale("en");
@@ -99,23 +110,22 @@ export default function DetailedBlog() {
             <p className="my-3 text-slate-400 text-sm">
               Posted: {Moment(blog.date_posted).calendar()}
             </p>
-            {auth.currentUser !== null &&
-              auth?.currentUser.uid === import.meta.env.VITE_ADMIN_ID && (
-                <div className="flex align-items-center">
-                  <button
-                    onClick={handleEdit}
-                    className="m-3 w-16 h-8 px-3 py-2 text-xs font-medium  text-center text-white bg-stone-400 rounded-lg hover:bg-stone-800 focus:ring-4 focus:outline-none focus:ring-stone-300 "
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={confirmDelete}
-                    className="m-3 h-8 w-16 px-3 py-2 text-xs font-medium text-center text-white bg-stone-700 rounded-lg hover:bg-stone-800 focus:ring-4 focus:outline-none focus:ring-stone-300 "
-                  >
-                    Delete
-                  </button>
-                </div>
-              )}
+            {adminFlag && (
+              <div className="flex align-items-center">
+                <button
+                  onClick={handleEdit}
+                  className="m-3 w-16 h-8 px-3 py-2 text-xs font-medium  text-center text-white bg-stone-400 rounded-lg hover:bg-stone-800 focus:ring-4 focus:outline-none focus:ring-stone-300 "
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={confirmDelete}
+                  className="m-3 h-8 w-16 px-3 py-2 text-xs font-medium text-center text-white bg-stone-700 rounded-lg hover:bg-stone-800 focus:ring-4 focus:outline-none focus:ring-stone-300 "
+                >
+                  Delete
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}

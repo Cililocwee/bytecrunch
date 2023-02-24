@@ -12,13 +12,13 @@ export default function Create({ user }) {
   const [date, setDate] = useState();
 
   const navigate = useNavigate();
-  useEffect(() => {
-    if (auth.currentUser == null) {
-      navigate("/");
-    } else if (auth.currentUser.uid !== import.meta.env.VITE_ADMIN_ID) {
-      navigate("/");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (auth.currentUser == null) {
+  //     navigate("/");
+  //   } else if (auth.currentUser.uid !== import.meta.env.VITE_ADMIN_ID) {
+  //     navigate("/");
+  //   }
+  // }, []);
 
   function handleChange(event) {
     const { name, value } = event.target;

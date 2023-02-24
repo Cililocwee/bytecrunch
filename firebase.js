@@ -122,7 +122,7 @@ const signInWithGoogle = async () => {
 };
 
 // Logout
-const logout = () => {
+const logout = async () => {
   signOut(auth);
 };
 

@@ -1,3 +1,4 @@
+import { onAuthStateChanged } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +13,16 @@ export default function Create({ user }) {
   const [date, setDate] = useState();
 
   const navigate = useNavigate();
+
+  const [adminFlag, setAdminFlag] = useState(false);
+
+  onAuthStateChanged(auth, (user) => {
+    if (user?.uid === import.meta.env.VITE_ADMIN_ID) {
+      return;
+    } else {
+      navigate("/");
+    }
+  });
   // useEffect(() => {
   //   if (auth.currentUser == null) {
   //     navigate("/");

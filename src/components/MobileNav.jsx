@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import CustomGoogleButton from "./CustomGoogleButton";
 export default function MobileNav() {
   return (
     <div className="relative sm:hidden">
@@ -19,6 +19,9 @@ export default function MobileNav() {
           <Link to={"/contact"}>
             <h2 className="text-xl font-bold">Contact</h2>
           </Link>
+        </li>
+        <li>
+          <CustomGoogleButton />
         </li>
       </ul>
     </div>

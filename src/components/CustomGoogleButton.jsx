@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { auth, logout, signInWithGoogle } from "../../firebase";
 
 export default function CustomGoogleButton() {
@@ -14,8 +14,9 @@ export default function CustomGoogleButton() {
 
   return (
     <button
+      id="custom-google-button"
       onClick={handleClick}
-      className="m-auto bg-stone-300 md:bg-stone-100 md:border py-2 px-2 w-fit md:rounded-xl flex shrink-0 justify-center items-center hover:bg-stone-400 md:hover:bg-stone-100 md:hover:scale-105 duration-300 "
+      className="rounded-full m-auto bg-stone-300 md:bg-stone-100 md:border py-2 px-2 w-fit md:rounded-xl flex shrink-0 justify-center items-center hover:bg-stone-400 md:hover:bg-stone-100 md:hover:scale-105 duration-300 "
     >
       <svg
         className=""

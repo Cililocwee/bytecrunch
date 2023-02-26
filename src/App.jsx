@@ -6,16 +6,16 @@ import ScrollToTop from "./components/ScrollToTop";
 import { lazy, Suspense } from "react";
 import "./index.css";
 
-const Create = lazy(() => import("./components/Create"));
-const Blogs = lazy(() => import("./components/Blogs"));
-const DetailedBlog = lazy(() => import("./components/DetailedBlog"));
-const AboutMe = lazy(() => import("./components/AboutMe"));
-const UpdateForm = lazy(() => import("./components/UpdateForm"));
-const Contact = lazy(() => import("./components/Contact"));
+const Create = lazy(() => import("./pages/Create"));
+const Blogs = lazy(() => import("./pages/Blogs"));
+const DetailedBlog = lazy(() => import("./pages/DetailedBlog"));
+const AboutMe = lazy(() => import("./pages/AboutMe"));
+const UpdateForm = lazy(() => import("./pages/UpdateForm"));
+const Contact = lazy(() => import("./pages/Contact"));
 
 function App() {
   return (
-    <div className="flex flex-col justify-between h-screen">
+    <div className="relative bg-red-200 flex flex-col justify-between h-screen">
       <Router>
         <ScrollToTop />
         <Navbar />

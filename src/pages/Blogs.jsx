@@ -21,11 +21,11 @@ export default function Blogs() {
   Moment.locale("en");
 
   return (
-    <div className=" px-8 flex flex-col text-center align-items-center pt-3 pb-16 lg:pt-8 lg:pb-24">
+    <div className=" mx-auto px-8 w-fit flex flex-col text-center align-items-center pt-3 pb-16 lg:pt-8 lg:pb-24">
       <div className="flex flex-col-reverse">
         {blogs.map((item, k) => (
           <div
-            className="border border-black-800 border-solid mx-auto w-full max-w-4xl format format-sm sm:format-base lg:format-lg format-blue"
+            className="border-b-2 border-stone-400 border-solid mx-auto w-full max-w-4xl format format-sm sm:format-base lg:format-lg format-blue"
             key={k}
           >
             <h4 className="text-left my-4 lemb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-3 lg:text-4xl">

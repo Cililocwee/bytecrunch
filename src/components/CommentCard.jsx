@@ -31,7 +31,7 @@ export default function CommentCard({
   }
 
   return (
-    <article className="max-w-sm p-6 mb-6 text-base bg-white rounded-lg ">
+    <article className="max-w-sm p-6 mb-6 text-base bg-background-secondary rounded-lg ">
       <footer className="flex justify-between items-center mb-2">
         <div className="flex items-center">
           <p className="inline-flex items-center mr-3 text-sm text-gray-900 ">

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Moment from "moment";
 import { useNavigate } from "react-router-dom";
-import CommentInput from "./CommentInput";
-import CommentCard from "./CommentCard";
+import CommentInput from "../components/CommentInput";
+import CommentCard from "../components/CommentCard";
 import { auth, db, getComments, getSpecificBlog } from "../../firebase";
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";

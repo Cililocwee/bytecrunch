@@ -4,4 +4,27 @@
 
 * {
   font-family: "Alegreya";
+  color: var(--font-primary-normal);
+}
+
+:root {
+  --background-primary: #372d3b;
+  --font-primary-important: #d94363;
+  --font-primary-normal: #ffffde;
+
+  --background-secondary: #c4415d;
+  --font-secondary-important: #ffffde;
+  --font-secondary-normal: #ffffde;
+}
+
+h1,
+h2,
+h3,
+h4,
+a {
+  color: var(--font-primary-important);
+}
+
+p {
+  color: var(--font-primary-normal);
 }

@@ -16,7 +16,7 @@ export default function Navbar() {
   });
 
   return (
-    <nav className="h-9 p-0 m-0 box-border justify-center sm:h-fit font-sans flex sm:justify-between text-center md:align-center md:flex-row md:text-left md:justify-center sm:py-4 sm:px-6 shadow md:items-center w-full">
+    <nav className="h-9 p-0 m-0 box-border border-b-background-secondary border-b-2 fixed bg-background-primary justify-center sm:h-fit font-sans flex sm:justify-between text-center md:align-center md:flex-row md:text-left md:justify-center sm:py-4 sm:px-6 shadow md:items-center w-full">
       {adminFlag ? (
         <Link to={"/create"}>
           <div className="">

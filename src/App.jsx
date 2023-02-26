@@ -1,18 +1,17 @@
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Create from "./components/Create";
-import Blogs from "./components/Blogs";
-import "./index.css";
-import DetailedBlog from "./components/DetailedBlog";
-import AboutMe from "./components/AboutMe";
 import Footer from "./components/Footer";
-import UpdateForm from "./components/UpdateForm";
-import Contact from "./components/Contact";
 import MobileNav from "./components/MobileNav";
 import ScrollToTop from "./components/ScrollToTop";
 import { lazy, Suspense } from "react";
+import "./index.css";
 
-const BlogPage = lazy(() => import("./components/Blogs"));
+const Create = lazy(() => import("./components/Create"));
+const Blogs = lazy(() => import("./components/Blogs"));
+const DetailedBlog = lazy(() => import("./components/DetailedBlog"));
+const AboutMe = lazy(() => import("./components/AboutMe"));
+const UpdateForm = lazy(() => import("./components/UpdateForm"));
+const Contact = lazy(() => import("./components/Contact"));
 
 function App() {
   return (

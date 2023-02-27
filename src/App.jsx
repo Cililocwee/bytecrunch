@@ -19,7 +19,7 @@ const Contact = lazy(() => import("./pages/Contact"));
 
 function App() {
   return (
-    <div className="h-full min-h-screen relative bg-[url('./assets/mountain_ukiyoe_medium.jpg')] bg-bottom bg-contain flex flex-col justify-between">
+    <div className="h-full min-h-screen relative bg-[url('./assets/mountain_ukiyoe_medium.jpg')] bg-bottom bg-cover sm:bg-contain flex flex-col justify-between">
       <Router>
         <ScrollToTop />
         <Navbar />

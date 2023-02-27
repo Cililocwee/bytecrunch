@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 export default function Contact() {
   return (
-    <div className="m-auto max-w-md px-8 flex flex-col text-center align-items-center pt-3 pb-16 lg:pt-8 lg:pb-24">
+    <div className="bg-background-primary w-fit m-auto max-w-sm p-8 flex flex-col text-center align-items-center">
       <h1 className="text-2xl font-bold mb-4">Looking to connect?</h1>
       <p className="mb-2">Look no further! </p>
       <p>You can reach me through my socials!: </p>

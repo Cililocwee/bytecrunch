@@ -5,6 +5,8 @@ import MobileNav from "./components/MobileNav";
 import ScrollToTop from "./components/ScrollToTop";
 import { lazy, Suspense } from "react";
 import "./index.css";
+import { Parallax } from "react-parallax";
+import Ukiyoe from "./assets/mountain_ukiyoe_medium.jpg";
 
 const Create = lazy(() => import("./pages/Create"));
 const Blogs = lazy(() => import("./pages/Blogs"));
@@ -13,9 +15,11 @@ const AboutMe = lazy(() => import("./pages/AboutMe"));
 const UpdateForm = lazy(() => import("./pages/UpdateForm"));
 const Contact = lazy(() => import("./pages/Contact"));
 
+// bg-[url('./assets/mountain_ukiyoe_medium.jpg')] bg-bottom bg-cover
+
 function App() {
   return (
-    <div className="relative bg-red-200 flex flex-col justify-between h-screen">
+    <div className="h-full min-h-screen bg-[url('./assets/mountain_ukiyoe_medium.jpg')] bg-bottom bg-cover relative bg-red-200 flex flex-col justify-between">
       <Router>
         <ScrollToTop />
         <Navbar />

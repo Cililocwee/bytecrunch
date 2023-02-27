@@ -5,7 +5,6 @@ import MobileNav from "./components/MobileNav";
 import ScrollToTop from "./components/ScrollToTop";
 import { lazy, Suspense } from "react";
 import "./index.css";
-import { Parallax } from "react-parallax";
 import Ukiyoe from "./assets/mountain_ukiyoe_medium.jpg";
 
 const Create = lazy(() => import("./pages/Create"));

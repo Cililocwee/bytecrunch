@@ -2,7 +2,7 @@ import React from "react";
 
 export default function AboutMe() {
   return (
-    <div className="bg-background-primary w-fit m-auto px-8 mb-auto flex flex-col align-items-center pb-16 lg:pb-24 pt-16 sm:pt-28 lg:pt-32">
+    <div className="bg-background-primary max-w-xl w-fit m-auto px-8 mb-auto flex flex-col align-items-center pb-16 lg:pb-24 pt-16 sm:pt-28 lg:pt-32">
       <div className="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue">
         <h1 className="text-center my-4 lemb-4 text-3xl font-extrabold leading-tight  text-gray-900 lg:mb-6 lg:text-4xl ">
           About Me

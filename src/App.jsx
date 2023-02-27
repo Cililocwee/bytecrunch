@@ -6,6 +6,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import { lazy, Suspense } from "react";
 import "./index.css";
 import Ukiyoe from "./assets/mountain_ukiyoe_medium.jpg";
+import ParallaxTest from "./pages/ParallaxTest";
 
 const Create = lazy(() => import("./pages/Create"));
 const Blogs = lazy(() => import("./pages/Blogs"));
@@ -18,7 +19,7 @@ const Contact = lazy(() => import("./pages/Contact"));
 
 function App() {
   return (
-    <div className="h-full min-h-screen bg-[url('./assets/mountain_ukiyoe_medium.jpg')] bg-bottom bg-cover relative bg-red-200 flex flex-col justify-between">
+    <div className="h-full min-h-screen relative bg-[url('./assets/mountain_ukiyoe_medium.jpg')] bg-bottom bg-contain flex flex-col justify-between">
       <Router>
         <ScrollToTop />
         <Navbar />
@@ -30,6 +31,7 @@ function App() {
             <Route path="/about" element={<AboutMe />} />
             <Route path="/update/:id" element={<UpdateForm />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/parallax" element={<ParallaxTest />} />
             <Route path="/*" element={<Blogs />} />
           </Routes>
         </Suspense>

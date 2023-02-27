@@ -1,0 +1,34 @@
+.animation,
+.animation_layer {
+  height: 1000px;
+}
+
+.animation {
+  display: block;
+  position: relative;
+  z-index: 10;
+}
+
+.animation_layer {
+  background-position: bottom center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 100%;
+  position: absolute;
+}
+
+.animation_layer.parallax {
+  position: fixed;
+}
+
+#background {
+  background-image: url(../assets/background.png);
+}
+
+#middleground {
+  background-image: url(../assets/middleground.png);
+}
+
+#foreground {
+  background-image: url(../assets/foreground.png);
+}

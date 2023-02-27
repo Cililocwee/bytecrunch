@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Moment from "moment";
 import { Link } from "react-router-dom";
 import { db, getBlogs } from "../../firebase";
+import ParallaxTest from "./ParallaxTest";
 
 export default function Blogs() {
   useEffect(() => {
@@ -21,7 +22,7 @@ export default function Blogs() {
   Moment.locale("en");
 
   return (
-    <div className=" bg-background-primary m-auto mx-auto px-8 w-fit flex flex-col text-center align-items-center pb-16 lg:pb-24 pt-16 sm:pt-28 lg:pt-32">
+    <div className=" bg-background-primary m-auto mx-auto px-8 w-fit max-w-2xl flex flex-col text-center align-items-center pb-16 lg:pb-24 pt-16 sm:pt-28 lg:pt-32">
       <div className="flex flex-col-reverse">
         {blogs.map((item, k) => (
           <div

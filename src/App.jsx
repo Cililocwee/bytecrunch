@@ -7,6 +7,7 @@ import { lazy, Suspense } from "react";
 import "./index.css";
 import ParallaxTest from "./pages/ParallaxTest";
 import ProgrammingSplash from "./assets/programming.jpg";
+import BlogCard from "./components/BlogCard";
 
 const Create = lazy(() => import("./pages/Create"));
 const Blogs = lazy(() => import("./pages/Blogs"));
@@ -31,6 +32,7 @@ function App() {
             className="object-cover w-full object-center"
           />
         </div>
+        <BlogCard />
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/" element={<Blogs />} />

@@ -51,7 +51,7 @@ export async function getBlogs(db) {
     moment(a.date_posted).diff(moment(b.date_posted))
   );
   // return blogsList;
-  return sortedBlogsList;
+  return sortedBlogsList.reverse();
 }
 
 // one blog GET

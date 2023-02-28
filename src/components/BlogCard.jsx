@@ -25,8 +25,8 @@ export default function BlogCard({ splash, title, blurb, publish, tags }) {
     // TODO I want a dim tracer running along the edge
     // TODO and on hover, I want it to speed up and glow brighter
 
-    <div class="m-1 w-fit z-20">
-      <Tilt>
+    <div class="m-1 w-fit z-20 relative">
+      <div className="">
         <div
           class={`${pudgy} justify-center bg-cyan-400 opacity-60 hover:opacity-90 h-[250px] flex flex-col  w-fit max-w-xs rounded-xl overflow-hidden shadow-lg`}
         >
@@ -43,7 +43,7 @@ export default function BlogCard({ splash, title, blurb, publish, tags }) {
             ))}
           </div>
         </div>{" "}
-      </Tilt>
+      </div>
     </div>
   );
 }

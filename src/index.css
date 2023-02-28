@@ -33,58 +33,37 @@ p {
   background-image: url(./flowingcircuit/flowingcircuit.svg);
 }
 
-.box {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #060c21;
-  margin: 40px;
+.blip {
+  --border-size: 3px;
+  --border-angle: 0turn;
+
+  background-image: conic-gradient(
+      from var(--border-angle),
+      #213,
+      #112 50%,
+      #213
+    ),
+    conic-gradient(from var(--border-angle), transparent 20%, #08f, #f03);
+  background-size: calc(100% - (var(--border-size) * 2))
+      calc(100% - (var(--border-size) * 2)),
+    cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  animation: bg-spin 3s linear infinite;
 }
-.box:before {
-  content: "";
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: #fff;
-  z-index: -1;
+
+@keyframes bg-spin {
+  to {
+    --border-angle: 1turn;
+  }
 }
-.box:after {
-  content: "";
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: #fff;
-  z-index: -2;
-  filter: blur(40px);
-}
-.box:nth-child(1):before,
-.box:nth-child(1):after {
-  background: linear-gradient(235deg, #89ff00, #010615, #00bcd4);
-}
-.box:nth-child(2):before,
-.box:nth-child(2):after {
-  background: linear-gradient(235deg, #ff005e, #010615, #fbff00);
-}
-.box:nth-child(3):before,
-.box:nth-child(3):after {
-  background: linear-gradient(235deg, #772aff, #010615, #2196f3);
-}
-.box .glass {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 100%;
-  display: block;
-  background: rgba(255, 255, 255, 0.1);
-  pointer-events: none;
-}
-.box .content {
-  padding: 20px;
-  color: #fff;
+/* .blip:hover {
+  animation-play-state: paused;
+} */
+
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0turn;
 }

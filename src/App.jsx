@@ -5,8 +5,8 @@ import MobileNav from "./components/MobileNav";
 import ScrollToTop from "./components/ScrollToTop";
 import { lazy, Suspense } from "react";
 import "./index.css";
-import Ukiyoe from "./assets/mountain_ukiyoe_medium.jpg";
 import ParallaxTest from "./pages/ParallaxTest";
+import ProgrammingSplash from "./assets/programming.jpg";
 
 const Create = lazy(() => import("./pages/Create"));
 const Blogs = lazy(() => import("./pages/Blogs"));
@@ -19,10 +19,18 @@ const Contact = lazy(() => import("./pages/Contact"));
 
 function App() {
   return (
-    <div className="h-full min-h-screen relative bg-[url('./assets/mountain_ukiyoe_medium.jpg')] bg-bottom bg-cover flex flex-col justify-between">
+    <div className="bg-gray-800 h-full min-h-screen relative flex flex-col justify-between">
       <Router>
         <ScrollToTop />
         <Navbar />
+        {/* Parallax this */}
+        <div className="h-[500px] bg-white overflow-hidden">
+          <img
+            src={ProgrammingSplash}
+            alt="programming"
+            className="object-cover w-full object-center"
+          />
+        </div>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/" element={<Blogs />} />

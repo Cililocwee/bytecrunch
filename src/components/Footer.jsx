@@ -12,14 +12,6 @@ export default function Footer() {
           corrie.stroup@gmail.com
         </a>{" "}
       </p>
-      <div className="flex pt-1">
-        <Link to="http://google.com">
-          <img className="h-10 mx-2 mt-1" src={Github} alt="" />
-        </Link>
-        <Link to="http://google.com">
-          <img className="h-10 mx-2 mt-1" src={Linkedin} alt="" />
-        </Link>
-      </div>
     </div>
   );
 }

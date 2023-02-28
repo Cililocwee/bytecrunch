@@ -23,12 +23,21 @@ export default function Blogs() {
   Moment.locale("en");
 
   return (
-    <div className="rounded-lg m-auto mx-auto px-8 w-fit text-center align-items-center">
-      <div className="grid grid-cols-3 gap-4 ">
+    <div className="rounded-lg mt-8 mb-auto mx-auto px-8 w-full text-center align-items-center">
+      <div className="flex flex-wrap justify-center gap-4 place-items-center">
         {blogs.map((item, k) => (
-          <BlogCard title={item.title} />
+          <BlogCard
+            title={
+              <Link
+                className="no-underline text-gray-800"
+                to={`/blog/${item.id}`}
+              >
+                {item.title}
+              </Link>
+            }
+          />
         ))}
-        {blogs.map((item, k) => (
+        {/* {blogs.map((item, k) => (
           <div
             className=" mx-auto w-full max-w-4xl format format-sm sm:format-base lg:format-lg format-blue"
             key={k}
@@ -47,7 +56,7 @@ export default function Blogs() {
               </p>
             </div>
           </div>
-        ))}
+        ))} */}
       </div>
     </div>
   );

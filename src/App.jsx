@@ -7,7 +7,7 @@ import { lazy, Suspense } from "react";
 import "./index.css";
 import ParallaxTest from "./pages/ParallaxTest";
 import ProgrammingSplash from "./assets/programming.jpg";
-import BlogCard from "./components/BlogCard";
+import FlowingCircuit from "./flowingcircuit/FlowingCircuit";
 
 const Create = lazy(() => import("./pages/Create"));
 const Blogs = lazy(() => import("./pages/Blogs"));
@@ -20,19 +20,18 @@ const Contact = lazy(() => import("./pages/Contact"));
 
 function App() {
   return (
-    <div className="bg-gray-800 h-full min-h-screen relative flex flex-col justify-between">
+    <div className="App bg-gray-800 h-full min-h-screen relative flex flex-col justify-between overflow-hidden">
       <Router>
         <ScrollToTop />
         <Navbar />
         {/* Parallax this */}
-        <div className="h-[500px] bg-white overflow-hidden">
+        <div className="h-fit max-h-[400px] bg-white overflow-hidden">
           <img
             src={ProgrammingSplash}
             alt="programming"
             className="object-cover w-full object-center"
           />
         </div>
-        <BlogCard />
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/" element={<Blogs />} />
@@ -47,6 +46,7 @@ function App() {
         </Suspense>
         <MobileNav />
         <Footer />
+        {/* <FlowingCircuit /> */}
       </Router>
     </div>
   );

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { auth } from "../../firebase";
 import CustomGoogleButton from "./CustomGoogleButton";
+import Typed from "typed.js";
 
 export default function Navbar() {
   const [adminFlag, setAdminFlag] = useState(false);

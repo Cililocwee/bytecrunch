@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import CustomGoogleButton from "./CustomGoogleButton";
 export default function MobileNav() {
   return (
-    <div className="relative sm:hidden">
-      <ul className="bg-background-primary border-t-2 border-t-background-secondary flex fixed bottom-0 w-full h-16 items-center justify-evenly">
+    <div className="relative z-20 sm:hidden">
+      <ul className="bg-gray-800 border-t-2 border-t-white flex fixed bottom-0 w-full h-16 items-center justify-evenly">
         <li>
           <Link to={"/"}>
             <h2 className="text-xl font-bold">Blogs</h2>

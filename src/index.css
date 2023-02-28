@@ -28,3 +28,7 @@ a {
 p {
   color: var(--font-primary-normal);
 }
+
+.App {
+  background-image: url(./flowingcircuit/flowingcircuit.svg);
+}

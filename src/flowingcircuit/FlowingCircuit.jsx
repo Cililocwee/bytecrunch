@@ -1,8 +1,9 @@
 import React from "react";
+import "../flowingcircuit/flowingcircuit.css";
 
 export default function FlowingCircuit() {
   return (
-    <div className="fixed top-0 z-10">
+    <div className="fixed top-0 z-10 opacity-20" id="flowingcircuit">
       <svg
         width="2400px"
         height="1600px"

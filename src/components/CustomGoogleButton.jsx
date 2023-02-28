@@ -16,7 +16,7 @@ export default function CustomGoogleButton() {
     <button
       id="custom-google-button"
       onClick={handleClick}
-      className="rounded-full m-auto border-2 border-background-secondary bg-font-primary-normal py-2 px-2 w-fit flex shrink-0 justify-center items-center hover:bg-stone-400 md:hover:bg-stone-100 md:hover:scale-105 duration-300 "
+      className="rounded-full m-auto border-2 border-cyan-400 bg-font-primary-normal py-2 px-2 w-fit flex shrink-0 justify-center items-center hover:bg-red-400 md:hover:bg-pink-300 md:hover:scale-105 duration-300 "
     >
       <svg
         className=""

@@ -5,9 +5,10 @@ import MobileNav from "./components/MobileNav";
 import ScrollToTop from "./components/ScrollToTop";
 import { lazy, Suspense } from "react";
 import "./index.css";
-import ParallaxTest from "./pages/ParallaxTest";
 import ProgrammingSplash from "./assets/programming.jpg";
+// import FlowingCircuit from "./assets/flowingcircuit.svg";
 import FlowingCircuit from "./flowingcircuit/FlowingCircuit";
+import { Parallax } from "react-parallax";
 
 const Create = lazy(() => import("./pages/Create"));
 const Blogs = lazy(() => import("./pages/Blogs"));
@@ -25,7 +26,7 @@ function App() {
         <ScrollToTop />
         <Navbar />
         {/* Parallax this */}
-        <div className="h-fit max-h-[400px] bg-white overflow-hidden">
+        <div className="z-20 h-fit max-h-[400px] bg-white overflow-hidden">
           <img
             src={ProgrammingSplash}
             alt="programming"
@@ -40,13 +41,13 @@ function App() {
             <Route path="/about" element={<AboutMe />} />
             <Route path="/update/:id" element={<UpdateForm />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/parallax" element={<ParallaxTest />} />
             <Route path="/*" element={<Blogs />} />
           </Routes>
         </Suspense>
         <MobileNav />
         <Footer />
-        {/* <FlowingCircuit /> */}
+        <FlowingCircuit />
+        {/* <img src={FlowingCircuit} alt="" /> */}
       </Router>
     </div>
   );

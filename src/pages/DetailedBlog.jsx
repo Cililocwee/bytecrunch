@@ -27,6 +27,7 @@ export default function DetailedBlog() {
       title: "Loading",
       content: "",
       date_posted: "",
+      tags: "",
     },
   ]);
 
@@ -64,11 +65,11 @@ export default function DetailedBlog() {
   return (
     <div
       id="detailed_blog"
-      className="px-8 mb-auto flex flex-col items-center pt-3 pb-16 lg:pt-8 lg:pb-24 "
+      className="z-30 px-8 mb-auto flex flex-col items-center pt-3 pb-16 lg:pt-8 lg:pb-24 "
     >
       {blog && (
         <div className="pb-8 mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue ">
-          <h1 className="text-cyan-300 text-center my-4 lemb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl">
+          <h1 className="text-cyan-300 text-center my-4 lemb-4 text-3xl font-extrabold leading-tight  lg:mb-6 lg:text-4xl">
             {blog.title}
           </h1>
           <p className="whitespace-pre-wrap">{blog.content}</p>

@@ -10,6 +10,7 @@ export default function UpdateForm() {
       title: "Loading",
       content: "",
       date_posted: "",
+      tags: "",
     },
   ]);
 
@@ -48,14 +49,15 @@ export default function UpdateForm() {
     await updateDoc(blogRef, {
       title: input.title,
       content: input.content,
+      tags: input.tags.split(","),
     }).then(() => alert("Edit completed. Redirecting..."));
 
     navigate(`/blog/${location}`);
   }
 
   return (
-    <div>
-      <div className="flex flex-col items-center pt-3 pb-16 lg:pt-16 lg:pb-24  dark:bg-gray-900">
+    <div className="z-30">
+      <div className="z-30 flex flex-col items-center pt-3 pb-16 lg:pt-16 lg:pb-24  dark:bg-gray-900">
         <h1 className="text-5xl font-bold mt-0 mb-6">Update a Post</h1>
         <form className="gap-5 items-stretch mb-3 w-96 flex flex-col">
           <div className="form-group">
@@ -79,6 +81,23 @@ export default function UpdateForm() {
             dark:border-gray-600 dark:placeholder-gray-400 
             dark:text-white dark:focus:ring-blue-500 
             dark:focus:border-blue-500"
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="tags" className="block mb-2 text-sm font-medium ">
+              Tags:
+            </label>
+            <input
+              onChange={handleChange}
+              name="tags"
+              value={input.tags}
+              autoComplete="off"
+              type="text"
+              placeholder="CSV, no spaces... [webdev,frontend,etc]"
+              className="text-gray-700 block p-2.5 w-full text-sm 
+            bg-gray-50 rounded-lg 
+            border border-gray-300"
             />
           </div>
 

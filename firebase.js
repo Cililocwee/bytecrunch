@@ -48,10 +48,10 @@ export async function getBlogs(db) {
   const blogsSnapshot = await getDocs(blogsCol);
   const blogsList = blogsSnapshot.docs.map((doc) => doc.data());
   const sortedBlogsList = blogsList.sort((a, b) =>
-    moment(a.date_posted).diff(moment(b.date_posted))
+    moment(b.date_posted).diff(moment(a.date_posted))
   );
   // return blogsList;
-  return sortedBlogsList.reverse();
+  return sortedBlogsList;
 }
 
 // one blog GET

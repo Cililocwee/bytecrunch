@@ -4,17 +4,16 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, db } from "../../firebase";
 
-export default function Create({ user }) {
+export default function Create() {
   const [input, setInput] = useState({
     title: "",
     content: "",
+    tags: "",
   });
 
   const [date, setDate] = useState();
 
   const navigate = useNavigate();
-
-  const [adminFlag, setAdminFlag] = useState(false);
 
   onAuthStateChanged(auth, (user) => {
     if (user?.uid === import.meta.env.VITE_ADMIN_ID) {
@@ -23,13 +22,6 @@ export default function Create({ user }) {
       navigate("/");
     }
   });
-  // useEffect(() => {
-  //   if (auth.currentUser == null) {
-  //     navigate("/");
-  //   } else if (auth.currentUser.uid !== import.meta.env.VITE_ADMIN_ID) {
-  //     navigate("/");
-  //   }
-  // }, []);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -50,6 +42,7 @@ export default function Create({ user }) {
       date_posted: blogObj.date_posted,
       title: blogObj.title,
       id: blogObj.id,
+      tags: blogObj.tags,
     });
   }
 
@@ -68,6 +61,7 @@ export default function Create({ user }) {
       title: input.title,
       content: input.content,
       date_posted: date,
+      tags: input.tags.split(","),
       id: crypto.randomUUID(),
     };
 
@@ -86,14 +80,11 @@ export default function Create({ user }) {
     );
   } else if (auth.currentUser.uid === import.meta.env.VITE_ADMIN_ID) {
     return (
-      <div className="flex flex-col items-center pt-3 pb-16 lg:pt-16 lg:pb-24  dark:bg-gray-900">
+      <div className="z-30 flex flex-col items-center pt-3 pb-16 lg:pt-16 lg:pb-24  dark:bg-gray-900">
         <h1 className="text-5xl font-bold mt-0 mb-6">Post a new blog</h1>
         <form className="gap-5 items-stretch mb-3 w-96 flex flex-col">
           <div className="form-group">
-            <label
-              htmlFor="title"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
+            <label htmlFor="title" className="block mb-2 text-sm font-medium ">
               Title:
             </label>
             <input
@@ -103,21 +94,31 @@ export default function Create({ user }) {
               autoComplete="off"
               type="text"
               placeholder="Blog title..."
-              className="block p-2.5 w-full text-sm 
-            text-gray-900 bg-gray-50 rounded-lg 
-            border border-gray-300 focus:ring-red-500 
-            focus:border-blue-500 dark:bg-gray-700 
-            dark:border-gray-600 dark:placeholder-gray-400 
-            dark:text-white dark:focus:ring-blue-500 
-            dark:focus:border-blue-500"
+              className="block p-2.5 w-full text-sm  text-gray-700
+            bg-gray-50 rounded-lg 
+            border border-gray-300"
             />
           </div>
 
           <div className="form-group">
-            <label
-              htmlFor="content"
-              className="form-label inline-block mb-2 text-gray-700"
-            >
+            <label htmlFor="tags" className="block mb-2 text-sm font-medium ">
+              Tags:
+            </label>
+            <input
+              onChange={handleChange}
+              name="tags"
+              value={input.tags}
+              autoComplete="off"
+              type="text"
+              placeholder="CSV, no spaces... [webdev,frontend,etc]"
+              className="text-gray-700 block p-2.5 w-full text-sm 
+            bg-gray-50 rounded-lg 
+            border border-gray-300"
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="content" className="form-label inline-block mb-2">
               Blog content:
             </label>
             <textarea
@@ -135,7 +136,7 @@ export default function Create({ user }) {
             py-1.5
             text-base
             font-normal
-            text-gray-700
+            text-pink-600
              bg-clip-padding
             border border-solid border-gray-300
             rounded

@@ -35,6 +35,7 @@ export default function Blogs() {
                 {item.title}
               </Link>
             }
+            tags={item.tags}
           />
         ))}
         {/* {blogs.map((item, k) => (

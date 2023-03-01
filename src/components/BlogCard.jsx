@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Tilt from "react-parallax-tilt";
-import Programming from "../assets/programming_splash.jpg";
 import BlogTag from "./BlogTag";
 
 export default function BlogCard({ splash, title, blurb, publish, tags }) {
@@ -14,10 +12,10 @@ export default function BlogCard({ splash, title, blurb, publish, tags }) {
   const [pudgy, setPudgy] = useState("rounded-tr-lg");
 
   // TODO This will directly take tags prop which will feed tags from Firebase
-  const [blogTags, setBlogTags] = useState(["web-development", "frontend"]);
 
   useEffect(() => {
     const roll = Math.floor(Math.random() * roundChoices.length);
+    console.log(title + ": " + tags);
 
     setPudgy(roundChoices[roll]);
   }, []);
@@ -38,7 +36,7 @@ export default function BlogCard({ splash, title, blurb, publish, tags }) {
             </p>
           </div>
           <div class="px-6 pb-2">
-            {blogTags.map((tag) => (
+            {tags?.map((tag) => (
               <BlogTag content={tag} />
             ))}
           </div>

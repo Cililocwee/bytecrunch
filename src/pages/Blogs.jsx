@@ -36,6 +36,8 @@ export default function Blogs() {
               </Link>
             }
             tags={item.tags}
+            date_posted={item.date_posted}
+            blurb={item.content}
           />
         ))}
         {/* {blogs.map((item, k) => (

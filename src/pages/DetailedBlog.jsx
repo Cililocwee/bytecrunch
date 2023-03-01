@@ -6,6 +6,7 @@ import CommentCard from "../components/CommentCard";
 import { auth, db, getComments, getSpecificBlog } from "../../firebase";
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
+import BlogTag from "../components/BlogTag";
 
 export default function DetailedBlog() {
   /* Even this isn't rerendering the page on auth change,
@@ -73,6 +74,9 @@ export default function DetailedBlog() {
             {blog.title}
           </h1>
           <p className="whitespace-pre-wrap">{blog.content}</p>
+          <section className="tags pt-5">
+            {blog.tags && blog.tags.map((tag) => <BlogTag content={tag} />)}
+          </section>
           <div className="flex justify-between items-center">
             <p className="my-3 text-slate-400 text-sm">
               Posted: {Moment(blog.date_posted).calendar()}

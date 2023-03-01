@@ -9,6 +9,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import BlogTag from "../components/BlogTag";
 
 export default function DetailedBlog() {
+  Moment.locale("en");
   /* Even this isn't rerendering the page on auth change,
   for the user it doesn't matter, but for the admin its annoying */
   const [adminFlag, setAdminFlag] = useState(false);
@@ -22,7 +23,7 @@ export default function DetailedBlog() {
 
   const location = window.location.href.split("/blog/")[1];
   const navigate = useNavigate();
-  Moment.locale("en");
+
   const [blog, setBlog] = useState([
     {
       title: "Loading",

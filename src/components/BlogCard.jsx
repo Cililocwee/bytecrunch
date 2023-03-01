@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import BlogTag from "./BlogTag";
+import Pac from "../assets/beaneater.svg";
+import Moment from "moment";
 
-export default function BlogCard({ splash, title, blurb, publish, tags }) {
+export default function BlogCard({ title, blurb, date_posted, tags }) {
+  Moment.locale("en");
   // Randomly assigns roundness to edges
   const roundChoices = [
     "rounded-tr-[60px]",
@@ -34,12 +37,16 @@ export default function BlogCard({ splash, title, blurb, publish, tags }) {
         >
           <div class="px-4 py-4">
             <div class="font-bold text-xl mb-2">{title || "Blog"}</div>
-            <p class="text-gray-700 text-base">
-              {blurb
-                ? makeBlurb(blurb)
-                : "Lorem ipsum dolor sit amet, consectetur adipisicing elit."}
-            </p>
+
+            {blurb ? (
+              <p class="text-gray-700 text-base">{makeBlurb(blurb)}</p>
+            ) : (
+              <img classname="h-12" src={Pac} alt="loading waka waka waka" />
+            )}
           </div>
+          <p className="text-pink-500 pb-2">
+            Posted: {Moment(date_posted).calendar() || "Recently"}
+          </p>
           <div class="px-6 pb-2">
             {tags?.map((tag) => (
               <BlogTag content={tag} />

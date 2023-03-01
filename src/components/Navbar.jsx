@@ -17,7 +17,7 @@ export default function Navbar() {
   });
 
   return (
-    <nav className="z-20 h-9 p-0 m-0 box-border  justify-center sm:h-fit font-sans flex sm:justify-between text-center md:align-center md:flex-row md:text-left md:justify-center sm:py-4 sm:px-6 shadow md:items-center w-full">
+    <nav className="z-20 h-12 p-0 m-0 box-border justify-center sm:h-fit font-sans flex sm:justify-between text-center md:align-center md:flex-row md:text-left md:justify-center sm:py-4 sm:px-6 shadow md:items-center w-full">
       {adminFlag ? (
         <Link to={"/create"}>
           <div className="">
@@ -29,12 +29,10 @@ export default function Navbar() {
         </Link>
       ) : (
         <Link to={"/"}>
-          <div className="">
-            <h1 className="mx-auto text-2xl font-bold">Corrie's Blog</h1>
-            <p className="hidden sm:flex">
-              Web development - one problem at a time
-            </p>
-          </div>
+          <h1 className="mx-auto text-2xl font-bold">Corrie's Blog</h1>
+          <p className="hidden sm:flex">
+            Web development - one problem at a time
+          </p>
         </Link>
       )}
 

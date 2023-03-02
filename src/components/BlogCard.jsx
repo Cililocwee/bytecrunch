@@ -33,7 +33,7 @@ export default function BlogCard({ title, blurb, date_posted, tags }) {
     <div class="m-1 w-fit z-20 relative">
       <div className="">
         <div
-          class={`${pudgy} justify-center bg-cyan-400 opacity-60 hover:opacity-90 h-[250px] flex flex-col  w-fit max-w-xs rounded-xl overflow-hidden shadow-lg`}
+          class={`${pudgy} justify-center bg-cyan-400 opacity-60 hover:opacity-90 h-[300px] flex flex-col  w-fit max-w-xs rounded-xl overflow-hidden shadow-lg`}
         >
           <div class="px-4 py-4">
             <div class="font-bold text-xl mb-2">{title || "Blog"}</div>

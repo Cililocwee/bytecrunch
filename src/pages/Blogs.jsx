@@ -16,7 +16,7 @@ export default function Blogs() {
     {
       title: "",
       content: "",
-      date_posted: "",
+      date_posted: new Date().toLocaleString(),
     },
   ]);
 
@@ -40,26 +40,6 @@ export default function Blogs() {
             blurb={item.content}
           />
         ))}
-        {/* {blogs.map((item, k) => (
-          <div
-            className=" mx-auto w-full max-w-4xl format format-sm sm:format-base lg:format-lg format-blue"
-            key={k}
-          >
-            <h4 className="text-left my-4 lemb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-3 lg:text-4xl">
-              <Link
-                className="no-underline text-gray-800"
-                to={`/blog/${item.id}`}
-              >
-                {item.title}
-              </Link>
-            </h4>
-            <div className="flex justify-between">
-              <p className="my-3 text-gray-700 text-sm">
-                Published: {Moment(item.date_posted).calendar()}
-              </p>
-            </div>
-          </div>
-        ))} */}
       </div>
     </div>
   );

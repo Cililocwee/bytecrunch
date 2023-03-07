@@ -6,9 +6,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import { lazy, Suspense } from "react";
 import "./index.css";
 import ProgrammingSplash from "./assets/programming.jpg";
-// import FlowingCircuit from "./assets/flowingcircuit.svg";
 import FlowingCircuit from "./flowingcircuit/FlowingCircuit";
-import { Parallax } from "react-parallax";
 
 const Create = lazy(() => import("./pages/Create"));
 const Blogs = lazy(() => import("./pages/Blogs"));

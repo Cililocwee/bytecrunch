@@ -3,7 +3,6 @@ import Moment from "moment";
 import { Link } from "react-router-dom";
 import { db, getBlogs } from "../../firebase";
 import BlogCard from "../components/BlogCard";
-import GlassCard from "../experimental/GlassCard";
 
 export default function Blogs() {
   useEffect(() => {
@@ -27,10 +26,12 @@ export default function Blogs() {
       <div className="flex flex-wrap max-w-5xl m-auto justify-center gap-4 place-items-center">
         {blogs.map((item, k) => (
           <BlogCard
+            key={k}
             title={
               <Link
                 className="no-underline text-gray-800"
                 to={`/blog/${item.id}`}
+                key={crypto.randomUUID()}
               >
                 {item.title}
               </Link>

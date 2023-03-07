@@ -30,26 +30,26 @@ export default function BlogCard({ title, blurb, date_posted, tags }) {
   }
 
   return (
-    <div class="m-1 w-fit z-20 relative">
+    <div className="m-1 w-fit z-20 relative">
       <div className="">
         <div
-          class={`${pudgy} justify-center bg-cyan-400 opacity-60 hover:opacity-90 h-[300px] flex flex-col  w-fit max-w-xs rounded-xl overflow-hidden shadow-lg`}
+          className={`${pudgy} justify-center bg-cyan-400 opacity-60 hover:opacity-90 h-[300px] flex flex-col  w-fit max-w-xs rounded-xl overflow-hidden shadow-lg`}
         >
-          <div class="px-4 py-4">
-            <div class="font-bold text-xl mb-2">{title || "Blog"}</div>
+          <div className="px-4 py-4">
+            <div className="font-bold text-xl mb-2">{title || "Blog"}</div>
 
             {blurb ? (
-              <p class="text-gray-700 text-base">{makeBlurb(blurb)}</p>
+              <p className="text-gray-700 text-base">{makeBlurb(blurb)}</p>
             ) : (
-              <img classname="h-12" src={Pac} alt="loading waka waka waka" />
+              <img className="h-12" src={Pac} alt="loading waka waka waka" />
             )}
           </div>
           <p className="text-pink-500 pb-2">
             Posted: {Moment(date_posted).calendar() || "Recently"}
           </p>
-          <div class="px-6 pb-2">
+          <div className="px-6 pb-2">
             {tags?.map((tag) => (
-              <BlogTag content={tag} />
+              <BlogTag key={crypto.randomUUID()} content={tag} />
             ))}
           </div>
         </div>{" "}

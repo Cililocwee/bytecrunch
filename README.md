@@ -35,4 +35,11 @@ The React Firebase Blog Application is built using the following technologies:
 
 ## Contributing
 
-If you'd like to contribute to the React Firebase Blog Application, feel free to open an issue or submit a pull request. Please make sure to follow the project's code
+If you'd like to contribute to the React Firebase Blog Application, feel free to open an issue or submit a pull request. Please make sure to follow the project's code of conduct.
+
+## License
+
+This project is licensed under the MIT License. Feel free to use and modify this code for your own projects.
+
+
+

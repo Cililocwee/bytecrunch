@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 * {
-  font-family: "Alegreya";
+  /* font-family: "Alegreya"; */
   color: var(--font-primary-normal);
   color: var(--font-primary-normal);
 }

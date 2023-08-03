@@ -7,6 +7,7 @@ import { lazy, Suspense } from "react";
 import "./index.css";
 import ProgrammingSplash from "./assets/programming.jpg";
 import FlowingCircuit from "./flowingcircuit/FlowingCircuit";
+import AdminPage from "./admin_panel/AdminPage";
 
 const Create = lazy(() => import("./pages/Create"));
 const Blogs = lazy(() => import("./pages/Blogs"));
@@ -19,18 +20,10 @@ const Contact = lazy(() => import("./pages/Contact"));
 
 function App() {
   return (
-    <div className="App bg-gray-800 h-full min-h-screen relative flex flex-col justify-between overflow-hidden">
+    <div className="App bg-gray-800 h-screen min-h-screen relative flex flex-col justify-between overflow-auto">
       <Router>
         <ScrollToTop />
         <Navbar />
-        {/* Parallax this */}
-        <div className="z-20 h-fit max-h-[400px] bg-white overflow-hidden">
-          <img
-            src={ProgrammingSplash}
-            alt="programming"
-            className="object-cover w-full object-center"
-          />
-        </div>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/" element={<Blogs />} />
@@ -39,12 +32,13 @@ function App() {
             <Route path="/about" element={<AboutMe />} />
             <Route path="/update/:id" element={<UpdateForm />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/admin" element={<AdminPage />} />
             <Route path="/*" element={<Blogs />} />
           </Routes>
         </Suspense>
         <MobileNav />
         <Footer />
-        <FlowingCircuit />
+        {/* <FlowingCircuit /> */}
         {/* <img src={FlowingCircuit} alt="" /> */}
       </Router>
     </div>

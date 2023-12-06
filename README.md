@@ -1,20 +1,19 @@
 # React Firebase Blog Application
 
-Welcome to my React Firebase Blog Application! This application allows you to create and manage your own blog, where you can write posts and share them with the world.
-
-The application is built using React and Firebase, which makes it easy to store and manage your blog posts. You can also customize the look and feel of your blog using the built-in styling options.
+This is a simple blog application powered by React. It uses Firebase as a database and Firebase Authentication to control auth requests.
 
 ## Getting Started
 
 To get started with the application, follow these steps:
 
-1. Clone the repository to your local machine using `git clone https://github.com/YOUR-USERNAME/react-firebase-blog.git`
+1. Clone the repository to your local machine.
 2. Install the required dependencies using `npm install`
 3. Set up a Firebase account and create a new project
-4. Create a new `.env` file in the root directory and add your Firebase project configuration details
-5. Start the development server using `npm start`
+4. Add your Firebase config into the firebase.js file
+5. Create a new `.env` file in the root directory and add your Google auth uid
+6. Start the development server using `npm run dev`
 
-You should now be able to view the application in your web browser at `http://localhost:4200/`.
+This project is packaged using Vite, so the default address is `localhost:5173`
 
 ## Features
 

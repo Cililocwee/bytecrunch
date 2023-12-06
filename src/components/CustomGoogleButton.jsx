@@ -1,20 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { auth, logout, signInWithGoogle } from "../../firebase";
 
-export default function CustomGoogleButton({ adminFlag }) {
+export default function CustomGoogleButton() {
   async function handleClick() {
-    if (auth.currentUser === null) {
-      signInWithGoogle();
-    } else {
-      if (confirm("Log out?")) {
-        logout().then(() => alert("Logged out..."));
+    let admin = auth.currentUser?.uid == import.meta.env.VITE_ADMIN_ID;
+
+    if (admin) {
+      if (confirm("Do you want to log out?")) {
+        logout().then(() => alert("You've been logged out."));
       }
+    } else {
+      signInWithGoogle();
     }
   }
 
   return (
     <div className="text-center mt-auto mb-8">
-      {adminFlag ? (
+      {auth.currentUser != null ? (
         <button onClick={handleClick}>Log Out</button>
       ) : (
         <button onClick={handleClick}>Log In</button>

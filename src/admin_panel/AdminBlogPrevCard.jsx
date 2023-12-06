@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import BlogTag from "../components/BlogTag";
-import Pac from "../assets/beaneater.svg";
 import Moment from "moment";
 
 export default function AdminBlogPrevCard({ title, blurb, date_posted, tags }) {

@@ -5,8 +5,6 @@ import MobileNav from "./components/MobileNav";
 import ScrollToTop from "./components/ScrollToTop";
 import { lazy, Suspense } from "react";
 import "./index.css";
-import ProgrammingSplash from "./assets/programming.jpg";
-import FlowingCircuit from "./flowingcircuit/FlowingCircuit";
 import AdminPage from "./admin_panel/AdminPage";
 
 const Create = lazy(() => import("./pages/Create"));
@@ -15,8 +13,6 @@ const DetailedBlog = lazy(() => import("./pages/DetailedBlog"));
 const AboutMe = lazy(() => import("./pages/AboutMe"));
 const UpdateForm = lazy(() => import("./pages/UpdateForm"));
 const Contact = lazy(() => import("./pages/Contact"));
-
-// bg-[url('./assets/mountain_ukiyoe_medium.jpg')] bg-bottom bg-cover
 
 function App() {
   return (
@@ -34,12 +30,11 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/admin" element={<AdminPage />} />
             <Route path="/*" element={<Blogs />} />
+            <Route path="*" element={<h1>Page Not Found </h1>} />
           </Routes>
         </Suspense>
         <MobileNav />
         <Footer />
-        {/* <FlowingCircuit /> */}
-        {/* <img src={FlowingCircuit} alt="" /> */}
       </Router>
     </div>
   );

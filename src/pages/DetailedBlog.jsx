@@ -4,22 +4,12 @@ import { useNavigate } from "react-router-dom";
 import CommentInput from "../components/CommentInput";
 import CommentCard from "../components/CommentCard";
 import { auth, db, getComments, getSpecificBlog } from "../../firebase";
-import { deleteDoc, doc, setDoc } from "firebase/firestore";
-import { onAuthStateChanged } from "firebase/auth";
+import { deleteDoc, doc } from "firebase/firestore";
 import BlogTag from "../components/BlogTag";
 
 export default function DetailedBlog() {
+  // TODO: Refactor as Moment is deprecated
   Moment.locale("en");
-  /* Even this isn't rerendering the page on auth change,
-  for the user it doesn't matter, but for the admin its annoying */
-  const [adminFlag, setAdminFlag] = useState(false);
-  onAuthStateChanged(auth, (user) => {
-    if (user?.uid === import.meta.env.VITE_ADMIN_ID) {
-      setAdminFlag(true);
-    } else {
-      setAdminFlag(false);
-    }
-  });
 
   const location = window.location.href.split("/blog/")[1];
   const navigate = useNavigate();
@@ -33,13 +23,18 @@ export default function DetailedBlog() {
     },
   ]);
 
-  // Tracks changes to comments and rerenders on post or delete
+  /**
+   * Tracks changes to comments and rerenders on post or delete
+   */
   const [commentTrigger, setCommentTrigger] = useState(false);
   const [comments, setComments] = useState([]);
 
+  /**
+   * Retrieves specific blog on load
+   * TODO: Refactor to pull from cache
+   */
   useEffect(() => {
     getSpecificBlog(db, location).then((results) => {
-      // console.log(results);
       setBlog(results);
     });
     getComments(db, location).then((results) => {
@@ -48,13 +43,18 @@ export default function DetailedBlog() {
     console.log("Detailed Blog Render");
   }, [commentTrigger]);
 
-  // These functions are for the actual blog
+  /**
+   * Confirms user intention before editing blog (admin only)
+   */
   function handleEdit() {
     if (confirm("Proceed to edit?")) {
       navigate(`/update/${location}`);
     }
   }
 
+  /**
+   * Confirms user intention before deleting blog (admin only)
+   */
   async function confirmDelete() {
     if (confirm("Delete?")) {
       await deleteDoc(doc(db, "blogs", location)).then(() => {
@@ -82,7 +82,7 @@ export default function DetailedBlog() {
             <p className="my-3 text-slate-400 text-sm">
               Posted: {Moment(blog.date_posted).calendar()}
             </p>
-            {adminFlag && (
+            {auth.currentUser?.uid == import.meta.env.VITE_ADMIN_ID ? (
               <div className="flex align-items-center">
                 <button
                   onClick={handleEdit}
@@ -97,12 +97,10 @@ export default function DetailedBlog() {
                   Delete
                 </button>
               </div>
-            )}
+            ) : null}
           </div>
         </div>
       )}
-
-      {/* <CustomGoogleButton /> */}
 
       <CommentInput
         blog={location}

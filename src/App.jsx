@@ -12,7 +12,7 @@ const DetailedBlog = lazy(() => import("./pages/DetailedBlog"));
 const AboutMe = lazy(() => import("./pages/AboutMe"));
 const UpdateForm = lazy(() => import("./pages/UpdateForm"));
 const Contact = lazy(() => import("./pages/Contact"));
-const AdminPage = lazt(() => import("./admin_panel/AdminPage"));
+const AdminPage = lazy(() => import("./admin_panel/AdminPage"));
 
 function App() {
   return (

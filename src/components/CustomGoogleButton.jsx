@@ -16,7 +16,7 @@ export default function CustomGoogleButton() {
 
   return (
     <div className="text-center mt-auto mb-8">
-      {auth.currentUser != null ? (
+      {auth.currentUser?.uid == import.meta.env.VITE_ADMIN_ID ? (
         <button onClick={handleClick}>Log Out</button>
       ) : (
         <button onClick={handleClick}>Log In</button>

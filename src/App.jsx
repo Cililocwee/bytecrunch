@@ -5,7 +5,6 @@ import MobileNav from "./components/MobileNav";
 import ScrollToTop from "./components/ScrollToTop";
 import { lazy, Suspense } from "react";
 import "./index.css";
-import AdminPage from "./admin_panel/AdminPage";
 
 const Create = lazy(() => import("./pages/Create"));
 const Blogs = lazy(() => import("./pages/Blogs"));
@@ -13,6 +12,7 @@ const DetailedBlog = lazy(() => import("./pages/DetailedBlog"));
 const AboutMe = lazy(() => import("./pages/AboutMe"));
 const UpdateForm = lazy(() => import("./pages/UpdateForm"));
 const Contact = lazy(() => import("./pages/Contact"));
+const AdminPage = lazt(() => import("./admin_panel/AdminPage"));
 
 function App() {
   return (
